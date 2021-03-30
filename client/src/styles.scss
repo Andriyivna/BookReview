@@ -1,0 +1,56 @@
+@import '~bootstrap/scss/bootstrap';
+
+html,
+body {
+    height: 100%;
+    font-size: 1rem;
+}
+
+.navbar {
+    font-size: 1.35rem;
+}
+
+.gradient {
+    background: rgb(252,197,104);
+    background: linear-gradient(90deg, rgba(252,197,104,1) 0%, rgba(255,169,63,1) 100%);
+}
+
+.page-header {
+    font-size: 1.25rem;
+    font-family: 'Syne Mono', monospace;
+}
+
+.quote-title {
+    font-family: 'Roboto', monospace;
+}
+
+
+.book-card .card-img-top{
+    padding: 20px;
+}
+.book-card-section{
+    padding-bottom: 220px;
+}
+
+.card-title{
+    font-size: 1.1rem;
+}
+
+/* if page content is smaller than 100% -> stick footer to the bottom */
+#wrap {
+    min-height: calc(100vh - 62px);
+}
+  
+.last-item {
+    overflow:auto;
+    padding-bottom: 90px; /* this needs to be bigger than footer height*/
+}
+
+
+footer {
+    color: #fff;
+    position: relative;
+    margin-top: -80px; /* negative value of footer height */
+    height: 80px;
+    clear:both;
+}
