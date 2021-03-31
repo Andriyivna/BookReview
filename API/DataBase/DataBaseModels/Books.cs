@@ -12,8 +12,8 @@ namespace BookReview.DataBase.DataBaseModels
         public string Author{ get; set; }
         public string Printer { get; set; }
         public string Description { get; set; }
-        public List<MyShelf> MyShelf { get; set; }
-        public List<Review> Review { get; set; }
+        public List<MyShelf> MyShelfs { get; set; }
+        public List<Review> Reviews { get; set; }
 
 
     }

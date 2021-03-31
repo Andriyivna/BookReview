@@ -12,6 +12,6 @@ namespace BookReview.DataBase.DataBaseModels
         public string Email { get; set; }
         public string Password { get; set; }
         public List<Review> Reviews { get; set; }
-        public List<MyShelf> MyShelf { get; set; }
+        public List<MyShelf> MyShelfs { get; set; }
     }
 }
