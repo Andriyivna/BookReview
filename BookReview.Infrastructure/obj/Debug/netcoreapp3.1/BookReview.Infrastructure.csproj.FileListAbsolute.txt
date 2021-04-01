@@ -1,9 +1,0 @@
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\bin\Debug\netcoreapp3.1\BookReview.Infrastructure.deps.json
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\bin\Debug\netcoreapp3.1\BookReview.Infrastructure.dll
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\bin\Debug\netcoreapp3.1\BookReview.Infrastructure.pdb
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\obj\Debug\netcoreapp3.1\BookReview.Infrastructure.csprojAssemblyReference.cache
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\obj\Debug\netcoreapp3.1\BookReview.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\obj\Debug\netcoreapp3.1\BookReview.Infrastructure.AssemblyInfo.cs
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\obj\Debug\netcoreapp3.1\BookReview.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\obj\Debug\netcoreapp3.1\BookReview.Infrastructure.dll
-C:\Users\alche\source\repos\BookReview3\BookReview.Infrastructure\obj\Debug\netcoreapp3.1\BookReview.Infrastructure.pdb
