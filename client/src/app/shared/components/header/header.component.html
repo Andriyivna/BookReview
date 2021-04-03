@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <div class="container">
+        <a class="navbar-brand" href="#"><img src="assets/img/logo_large.png" alt="logo" width="159" height="35"/></a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                (click)="isNavbarCollapsed = !isNavbarCollapsed"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div [ngbCollapse]="isNavbarCollapsed"  class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item px-2">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categories</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" routerLink="/top" routerLinkActive="active">Top picks</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" routerLink="/reviews" routerLinkActive="active">Reviews</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" routerLink="/bookcase" routerLinkActive="active">My bookcase</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
