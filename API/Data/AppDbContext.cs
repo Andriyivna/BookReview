@@ -1,9 +1,10 @@
 ﻿using API.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base (options)
         {
@@ -15,12 +16,13 @@ namespace API.Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<VirtualLibrary> VirtualLibraries { get; set; }
         public DbSet<VirtualLibraryBook> VirtualLibraryBooks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>()
                 .HasOne(x => x.FavouriteQuote)
                 .WithMany(x => x.UsersWhoFavouritedQuote)
