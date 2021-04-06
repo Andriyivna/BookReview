@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BookReview.DataBase
 {
-    public class MyBase: DbContext
+    public class MyBase : DbContext
     {
 
-        public MyBase(DbContextOptions<MyBase> options): base(options)
+        public MyBase(DbContextOptions<MyBase> options) : base(options)
         {
 
         }
@@ -21,4 +21,4 @@ namespace BookReview.DataBase
         public DbSet<Review> Review { get; set; }
         public DbSet<Books> Books { get; set; }
     }
-}
+    }

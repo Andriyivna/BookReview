@@ -10,7 +10,6 @@ namespace API.Data
         {
 
         }
-
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -23,17 +22,17 @@ namespace API.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Entities.User>()
                 .HasOne(x => x.FavouriteQuote)
                 .WithMany(x => x.UsersWhoFavouritedQuote)
                 .HasForeignKey(x => x.FavouriteQuoteId);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Entities.User>()
                 .HasOne(x => x.FavouriteBook)
                 .WithMany(x => x.UsersWhoFavouritedBook)
                 .HasForeignKey(x => x.FavouriteBookId);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Entities.User>()
                 .HasOne(x => x.VirtualLibrary)
                 .WithOne(x => x.User)
                 .HasForeignKey<VirtualLibrary>(x => x.UserId);
