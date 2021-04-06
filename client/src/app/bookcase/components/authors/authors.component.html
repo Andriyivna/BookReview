@@ -1,0 +1,52 @@
+<div>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">Authors</a>
+      <div class="d-flex">
+        <button class="btn btn-outline-success" type="button" (click)="startAddAuthor()" *ngIf="!editingMode">Add</button>
+        <button class="btn btn-outline-dark" type="button" (click)="editingMode=false" *ngIf="editingMode">Cancel</button>
+      </div>
+    </div>
+  </nav>
+
+  <table class="table table-striped" *ngIf="!editingMode">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let author of authors">
+      <th scope="row">{{author.id}}</th>
+      <td>{{author.firstName}}</td>
+      <td>{{author.lastName}}</td>
+      <td>
+        <div class="table-buttons">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="startEditAuthors(author)"><i class="fas fa-edit"></i></button>
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="removeAuthor(author.id)"><i class="fas fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="editingMode">
+    <form (submit)="$event.preventDefault(); saveAuthor()">
+      <div class="mb-3">
+        <label for="authorFirstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="authorFirstName" placeholder="First Name" autocomplete="off" required="" [(ngModel)]="editingAuthor.firstName" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="mb-3">
+        <label for="authorLastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="authorLastName" placeholder="Last Name" autocomplete="off" required="" [(ngModel)]="editingAuthor.lastName" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="mb-2">
+        <button class="btn btn-outline-success " type="submit">Save</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
