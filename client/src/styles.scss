@@ -11,8 +11,8 @@ body {
 }
 
 .gradient {
-    background: rgb(252,197,104);
-    background: linear-gradient(90deg, rgba(252,197,104,1) 0%, rgba(255,169,63,1) 100%);
+    background: rgb(252, 197, 104);
+    background: linear-gradient(90deg, rgba(252, 197, 104, 1) 0%, rgba(255, 169, 63, 1) 100%);
 }
 
 .page-header {
@@ -25,14 +25,15 @@ body {
 }
 
 
-.book-card .card-img-top{
+.book-card .card-img-top {
     padding: 20px;
 }
-.book-card-section{
+
+.book-card-section {
     padding-bottom: 220px;
 }
 
-.card-title{
+.card-title {
     font-size: 1.1rem;
 }
 
@@ -40,17 +41,19 @@ body {
 #wrap {
     min-height: calc(100vh - 62px);
 }
-  
+
 .last-item {
-    overflow:auto;
-    padding-bottom: 90px; /* this needs to be bigger than footer height*/
+    overflow: auto;
+    padding-bottom: 90px;
+    /* this needs to be bigger than footer height*/
 }
 
 
 footer {
     color: #fff;
     position: relative;
-    margin-top: -80px; /* negative value of footer height */
-    height: 80px;
-    clear:both;
+    margin-top: -70px;
+    /* negative value of footer height */
+    height: 70px;
+    clear: both;
 }
