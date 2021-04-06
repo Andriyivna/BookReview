@@ -1,5 +1,7 @@
 using API.Data;
 using API.Extensions;
+using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +28,9 @@ namespace API
 
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentityServices();
+            services.AddScoped<ITokenService, TokenService>();
+
+            services.AddIdentityServices(Configuration);
 
             services.AddSwaggerGen(c =>
             {
