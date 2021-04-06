@@ -1,4 +1,7 @@
-
+using API.Data;
+using API.Extensions;
+using API.Interfaces;
+using API.Services;
 using BookReview.Core.Repositories;
 using BookReview.Infrastructure.Repositories;
 using BookReview.Infrastructure.Services;
@@ -29,7 +32,6 @@ namespace BookReview
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -37,12 +39,18 @@ namespace BookReview
             services.AddScoped<IBooksServices, BooksServices>();
             services.AddSingleton(AutoMapperConfig.Initialize());
 
-            services.AddDbContext<MyBase>(options =>
-                  options.UseSqlServer(Configuration.GetConnectionString("MyBase")));
-        }
+        
+        
+        services.AddScoped<ITokenService, TokenService>();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            services.AddIdentityServices(Configuration);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+            });
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +60,8 @@ namespace BookReview
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
