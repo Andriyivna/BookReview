@@ -48,7 +48,7 @@ export class AuthorsComponent implements OnInit {
 
   saveAuthor(): void {
     if (this.editingAuthor.id === -1) {
-      this.editingAuthor.id = this.authors.length + 1;
+      this.editingAuthor.id = Math.max(...this.authors.map(author => author.id)) + 1;
       this.authors.push(this.editingAuthor);
     } else {
       const index = this.authors.findIndex((author) => {
