@@ -26,7 +26,8 @@ namespace BookReview
                     await context.Database.MigrateAsync();
 
                     var userManager = services.GetRequiredService<UserManager<User>>();
-                    await AppDbContextSeedIdentity.SeedUsersAsync(userManager);
+                    await AppDbContextSeed.SeedUsersAsync(userManager);
+                    await AppDbContextSeed.SeedDataAsync(context, loggerFactory);
                 }
                 catch (Exception ex)
                 {

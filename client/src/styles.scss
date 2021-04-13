@@ -29,7 +29,8 @@ body {
     padding: 20px;
 }
 
-.book-card-section {
+.book-card-section,
+.quote-section {
     padding-bottom: 220px;
 }
 
@@ -37,23 +38,25 @@ body {
     font-size: 1.1rem;
 }
 
-/* if page content is smaller than 100% -> stick footer to the bottom */
-#wrap {
-    min-height: calc(100vh - 62px);
-}
-
-.last-item {
-    overflow: auto;
-    padding-bottom: 90px;
-    /* this needs to be bigger than footer height*/
-}
-
-
 footer {
     color: #fff;
     position: relative;
-    margin-top: -70px;
-    /* negative value of footer height */
     height: 70px;
     clear: both;
 }
+
+.wrapper {
+  padding: 15px;
+  //64px-height of header, 70px-height of footer
+  min-height: calc(100vh - 64px - 70px);
+}
+.nav-pills {
+  .nav-link {
+    color: #1d2857;
+  }
+  .nav-link.active {
+    background-color: #1d2857;
+  }
+}
+
+
