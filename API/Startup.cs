@@ -48,11 +48,7 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-              app.UseCors(opt =>
-            {
-                   opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
 
-            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
