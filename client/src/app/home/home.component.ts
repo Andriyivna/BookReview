@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
+  isLoggedIn: boolean = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() { 
   }
 
+  ngOnInit(): void {
+    if(localStorage.getItem('token') != null){
+      this.isLoggedIn = true;
+    }
+  }
+  
 }
