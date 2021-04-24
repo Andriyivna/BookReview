@@ -37,7 +37,7 @@
                 <div ngbDropdown class="nav-item px-2" *ngIf="isLoggedIn">
                     <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>{{displayname}}</a>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <button ngbDropdownItem (click)="getUser()">My profile</button>
+                      <button ngbDropdownItem routerLink="/profile">My profile</button>
                       <button ngbDropdownItem (click)="onLogout()">Logout</button>
                     </div>
                 </div>
