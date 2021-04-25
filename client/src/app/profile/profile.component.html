@@ -1,5 +1,59 @@
-<div class="wrapper">
+<div class="wrapper">    
+    <header class="page-header gradient2">
+        <div class="">
+            <div class="d-flex justify-content-center">
+                <div class="">
+                    <img style="height:12rem" src="assets/img/av-male-1.png" class="img-resposive" alt="...">
+                </div>
+            </div>
+            <div class="d-sm-flex justify-content-center mt-4 pb-4">
+                <div align="center" class="p-2 d-flex flex-column">
+                    <label for="email">Email</label>
+                    <input class="text-center rounded shadow" name="email" type="text" value="{{email}}" disabled>
+                </div>
+                <div align="center" class="p-2 d-flex flex-column">
+                    <label for="displayname">Display Name</label>
+                    <input class="text-center rounded shadow" name="displayName" type="test" value="{{displayName}}" disabled>
+                </div>
+                
+            </div>
+        </div>
+    </header>
     <div class="container clear-top">
-        <p>profile works!</p>
+        <div class="row mt-4">
+            <h3>My reviews:</h3>
+        </div>
+        <div class="row mt-2">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Some title</td>
+                    <td>This book was trash...</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Another title</td>
+                    <td>That one was kinda good tho</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Yet another one</td>
+                    <td>The rhymes are exquisite and it's pretty fun to read-it ;)</td>
+                    <td>5</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
     </div>
 </div>
