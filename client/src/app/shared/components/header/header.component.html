@@ -32,8 +32,15 @@
                     <a class="nav-link" routerLink="/bookcase" routerLinkActive="active">My bookcase</a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
+                    <a class="nav-link" routerLink="/login" *ngIf="!isLoggedIn" routerLinkActive="active">Sign in</a>
                 </li>
+                <div ngbDropdown class="nav-item px-2" *ngIf="isLoggedIn">
+                    <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>{{displayname}}</a>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem routerLink="/profile">My profile</button>
+                      <button ngbDropdownItem (click)="onLogout()">Logout</button>
+                    </div>
+                </div>
             </ul>
         </div>
     </div>

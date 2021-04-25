@@ -6,35 +6,36 @@
 					<h3>Create a new account</h3>
 				</div>
 				<div class="card-body">
-					<form>
+					<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="username">
-
+							<input type="text" class="form-control" placeholder="displayname" formControlName="DisplayName">
 						</div>
                         <div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-at"></i></span>
 							</div>
-							<input type="email" class="form-control" placeholder="email">
+							<input type="email" class="form-control" placeholder="email" formControlName="Email">
 
 						</div>
-						<div class="input-group form-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+						<div formGroupName="Passwords">
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" class="form-control" placeholder="password" formControlName="Password" data-bs-toggle="tooltip" data-bs-html="true" title="Password must be at least 6 characters long, uppercase and special">
 							</div>
-							<input type="password" class="form-control" placeholder="password">
-						</div>
-                        <div class="input-group form-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" class="form-control" placeholder="confirm password" formControlName="ConfirmPassword" data-bs-toggle="tooltip" data-bs-html="true" title="Password must be at least 6 characters long, uppercase and special"> 
 							</div>
-							<input type="password" class="form-control" placeholder="confirm password">
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Sign up" class="btn float-right login_btn">
+							<input type="submit" value="Sign up" class="btn float-right login_btn" [disabled]="!service.formModel.valid">
 						</div>
 					</form>
 				</div>
