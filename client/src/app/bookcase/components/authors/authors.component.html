@@ -22,11 +22,7 @@
     <tr *ngFor="let author of authors">
       <th scope="row">{{author.id}}</th>
       <td>{{author.firstName}}</td>
-<<<<<<< HEAD
-      <td>{{author.lastName}}</td>
-=======
       <td>{{author.secondName}}</td>
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
       <td>
         <div class="table-buttons">
           <button type="button" class="btn btn-outline-primary btn-sm" (click)="startEditAuthors(author)"><i class="fas fa-edit"></i></button>
@@ -44,11 +40,7 @@
       </div>
       <div class="mb-3">
         <label for="authorLastName" class="form-label">Last Name</label>
-<<<<<<< HEAD
-        <input type="text" class="form-control" id="authorLastName" placeholder="Last Name" autocomplete="off" required="" [(ngModel)]="editingAuthor.lastName" [ngModelOptions]="{standalone: true}">
-=======
         <input type="text" class="form-control" id="authorLastName" placeholder="Last Name" autocomplete="off" required="" [(ngModel)]="editingAuthor.secondName" [ngModelOptions]="{standalone: true}">
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
       </div>
       <div class="mb-2">
         <button class="btn btn-outline-success " type="submit">Save</button>

@@ -32,10 +32,6 @@
                     <a class="nav-link" routerLink="/bookcase" routerLinkActive="active">My bookcase</a>
                 </li>
                 <li class="nav-item px-2">
-<<<<<<< HEAD
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
-                </li>
-=======
                     <a class="nav-link" routerLink="/login" *ngIf="!isLoggedIn" routerLinkActive="active">Sign in</a>
                 </li>
                 <div ngbDropdown class="nav-item px-2" *ngIf="isLoggedIn">
@@ -45,7 +41,6 @@
                       <button ngbDropdownItem (click)="onLogout()">Logout</button>
                     </div>
                 </div>
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
             </ul>
         </div>
     </div>

@@ -6,39 +6,23 @@
 					<h3>Sign In</h3>
 				</div>
 				<div class="card-body">
-<<<<<<< HEAD
-					<form>
-=======
 					<form #form='ngForm' (submit)="onSubmit(form)">
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-<<<<<<< HEAD
-							<input type="text" class="form-control" placeholder="username">
-=======
 							<input type="text" class="form-control" name="email" ngModel required placeholder="email">
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-<<<<<<< HEAD
-							<input type="password" class="form-control" placeholder="password">
-						</div>
-						<div class="form-group">
-							<input type="submit" value="Login" class="btn float-right login_btn">
-						</div>
-=======
 							<input type="password" class="form-control" name="password" ngModel required placeholder="password">
 						</div>
 						<div class="form-group">
 							<input type="submit" value="Login" class="btn float-right login_btn" [disabled]="!form.valid"> 
 						</div>
 						<span class="text-danger" *ngIf="loginAttempt">Something's wrong...</span>
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 					</form>
 				</div>
 				<div class="card-footer">

@@ -54,17 +54,6 @@ namespace API.Controllers
         }
 
         [HttpPut]
-<<<<<<< HEAD
-        public async Task<ActionResult<AuthorReturnDto>> UpdateAuthor(AuthorAddDto authorToAdd)
-        {
-            var author = _mapper.Map<Author>(authorToAdd);
-
-            var updatedAutor = await _repo.UpdateAuthorAsync(author);
-
-            var authorToReturn = _mapper.Map<AuthorReturnDto>(updatedAutor);
-
-            return CreatedAtAction(nameof(GetAuthorById), new { id = authorToReturn.Id }, authorToReturn);
-=======
         public async Task<ActionResult<AuthorReturnDto>> UpdateAuthor(AuthorUpdateDto authorToUpdate)
         {
             var author = await _repo.GetAuthorByIdAsync(authorToUpdate.Id);
@@ -77,7 +66,6 @@ namespace API.Controllers
             await _repo.UpdateAuthorAsync(author);
 
             return NoContent();
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
         }
 
         [HttpDelete("{id}")]

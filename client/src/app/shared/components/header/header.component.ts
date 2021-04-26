@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 
 @Component({
   selector: 'app-header',
@@ -13,16 +10,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class HeaderComponent implements OnInit {
   
   isNavbarCollapsed = true;
-<<<<<<< HEAD
-  
-  constructor() { 
-  }
-
-  ngOnInit(): void {
-  }
-
-  
-=======
   isLoggedIn: boolean = false;
   displayname: any;
   readonly BaseURL = 'https://localhost:5001/api';
@@ -54,5 +41,4 @@ export class HeaderComponent implements OnInit {
       err => console.log(err)
     );
   }
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 }
