@@ -6,14 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-<<<<<<< HEAD
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-=======
   
   isLoggedIn: boolean = false;
 
@@ -26,5 +18,4 @@ export class HomeComponent implements OnInit {
     }
   }
   
->>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 }
