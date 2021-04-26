@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+=======
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +12,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
 
+<<<<<<< HEAD
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+=======
   isLoggedIn: boolean = false;
   readonly BaseURL = 'https://localhost:5001/api';
   displayName: string = 'displayName';
@@ -35,4 +45,5 @@ export class ProfileComponent implements OnInit {
 
 
 
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 }

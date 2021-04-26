@@ -1,7 +1,11 @@
 ﻿using API.Entities;
+<<<<<<< HEAD
+using Microsoft.AspNetCore.Identity;
+=======
 using API.Entities.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -27,7 +31,11 @@ namespace API.Data
             }
         }
 
+<<<<<<< HEAD
+        public static async Task SeedDataAsync(AppDbContext context, ILoggerFactory loggerFactory)
+=======
         public static async Task SeedDataAsync(AppDbContext context, UserManager<User> userManager, ILoggerFactory loggerFactory)
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
         {
             try
             {
@@ -51,11 +59,17 @@ namespace API.Data
                             SecondName = "Pratchett"
                         }
                     };
+<<<<<<< HEAD
+
+=======
                     
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
                     context.Authors.AddRange(authors);
 
                     await context.SaveChangesAsync();
                 }
+<<<<<<< HEAD
+=======
 
                 if (!context.Genres.Any())
                 {
@@ -170,6 +184,7 @@ namespace API.Data
                         await context.SaveChangesAsync();
                     }
                 }
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
             }
             catch (Exception ex)
             {

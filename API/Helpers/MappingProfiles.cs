@@ -10,6 +10,8 @@ namespace API.Helpers
         {
             CreateMap<Author, AuthorReturnDto>().ReverseMap();
             CreateMap<Author, AuthorAddDto>().ReverseMap();
+<<<<<<< HEAD
+=======
             CreateMap<VirtualLibrary, VirtualLibraryDto>();
             CreateMap<VirtualLibraryBook, VirtualBookReturnDto>()
                 .ForMember(
@@ -28,6 +30,7 @@ namespace API.Helpers
                     dest => dest.BookId,
                     opt => opt.MapFrom(src => src.Book.Id));
             CreateMap<VirtualBookAddDto, VirtualLibraryBook>();
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
         }
     }
 }

@@ -16,14 +16,22 @@ namespace API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ITokenService _tokenService;
+<<<<<<< HEAD
+
+        public AccountsController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
+=======
         private readonly IVirtualLibrariesRepository _virtualLibRepo;
 
         public AccountsController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService, IVirtualLibrariesRepository virtualLibRepo)
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+<<<<<<< HEAD
+=======
             _virtualLibRepo = virtualLibRepo;
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
         }
 
         [HttpPost("login")]
@@ -59,12 +67,15 @@ namespace API.Controllers
 
             if (!result.Succeeded) return BadRequest();
 
+<<<<<<< HEAD
+=======
             var virtualLib = await _virtualLibRepo.CreateVirtualLibrary(user.Id);
 
             user.VirtualLibraryId = virtualLib.Id;
 
             await _userManager.UpdateAsync(user);
 
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
             return new UserDto
             {
                 DisplayName = user.DisplayName,

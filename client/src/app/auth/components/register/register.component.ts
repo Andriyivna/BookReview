@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+=======
 import { Router } from '@angular/router';
 import { UserService } from '../../user.service';
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 
 @Component({
   selector: 'app-register',
@@ -9,6 +12,13 @@ import { UserService } from '../../user.service';
 })
 export class RegisterComponent implements OnInit {
 
+<<<<<<< HEAD
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+=======
   constructor(public service: UserService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,4 +35,5 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 }
