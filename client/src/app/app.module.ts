@@ -12,12 +12,14 @@ import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { BookcaseModule } from './bookcase/bookcase.module';
 import { UserService } from './auth/user.service';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+	BookComponent
   ],
   imports: [
     BrowserModule,
