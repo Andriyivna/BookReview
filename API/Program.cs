@@ -15,7 +15,28 @@ namespace API
     {
       public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+                try
+                {
+                    var context = services.GetRequiredService<AppDbContext>();
+                    await context.Database.MigrateAsync();
+
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    await AppDbContextSeed.SeedUsersAsync(userManager);
+                    await AppDbContextSeed.SeedDataAsync(context, userManager, loggerFactory);
+                }
+                catch (Exception ex)
+                {
+                    var logger = loggerFactory.CreateLogger<Program>();
+                    logger.LogError(ex, "An error occured during migration");
+                }
+            }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

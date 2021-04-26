@@ -31,6 +31,8 @@ namespace API
 
             services.AddScoped<IAuthorsRepository, AuthorsRepository>();
 
+            services.AddScoped<IVirtualLibrariesRepository, VirtualLibrariesRepository>();
+
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddIdentityServices(Configuration);
@@ -68,6 +70,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 
