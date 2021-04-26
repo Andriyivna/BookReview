@@ -1,0 +1,56 @@
+.background-image {
+    background-image: url("/assets/img/books.jpg");
+    background-size: cover;
+}
+
+.card {
+    margin-top: 20vh;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.65) !important;
+}
+
+
+.card-header h3 {
+    color: white;
+}
+
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
+}
+
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+    color: white;
+}
+
+.login_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+
+.login_btn:hover {
+    color: black;
+    background-color: white;
+}
+
+.links {
+    color: white;
+}
+
+.links a {
+    margin-left: 4px;
+    color: #FFC312;
+}
+
+.links a:hover {
+    margin-left: 4px;
+    color: #b19544;
+}
