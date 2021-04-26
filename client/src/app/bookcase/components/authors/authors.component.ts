@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorsService } from '../../services/authors.service';
 
 export interface Author {
-  id: number;
+  id?: number;
   firstName: string;
-  lastName: string;
+  secondName: string;
 }
 
 @Component({
@@ -13,32 +14,16 @@ export interface Author {
 })
 export class AuthorsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authorsService: AuthorsService) { }
 
-  authors: Array<Author> = [
-    {
-      id: 1,
-      firstName: 'Daniel',
-      lastName: 'Keyes'
-    },
-    {
-      id: 2,
-      firstName: 'John',
-      lastName: 'Tolkien'
-    },
-    {
-      id: 3,
-      firstName: 'Joanne',
-      lastName: 'Rowling'
-    }
-  ];
+  authors: Array<Author> = [];
 
-  editingAuthor: Author = {id: -1, firstName: '', lastName: ''};
+  editingAuthor: Author = {firstName: '', secondName: ''};
   editingMode = false;
 
   startAddAuthor(): void {
     this.editingMode = true;
-    this.editingAuthor = {id: -1, firstName: '', lastName: ''};
+    this.editingAuthor = {firstName: '', secondName: ''};
   }
 
   startEditAuthors(author: Author): void {
@@ -47,34 +32,32 @@ export class AuthorsComponent implements OnInit {
   }
 
   saveAuthor(): void {
-    if (this.editingAuthor.id === -1) {
-      this.editingAuthor.id = Math.max(...this.authors.map(author => author.id)) + 1;
-      this.authors.push(this.editingAuthor);
+    if (!this.editingAuthor.id) {
+      this.authorsService.create(this.editingAuthor)
+        .then(() => this.update());
     } else {
-      const index = this.authors.findIndex((author) => {
-        return author.id === this.editingAuthor.id;
-      });
-      if (index !== -1) {
-        this.authors[index] = this.editingAuthor;
-      }
-
+      this.authorsService.update(this.editingAuthor)
+        .then(() => this.update());
     }
-    this.editingAuthor = {id: -1, firstName: '', lastName: ''};
+    this.editingAuthor = {id: -1, firstName: '', secondName: ''};
     this.editingMode = false;
   }
 
-  removeAuthor(id: number): void {
-    const index = this.authors.findIndex((author) => {
-      return author.id === id;
-    });
-    if (index !== -1) {
-      this.authors[index] = this.editingAuthor;
-      this.authors.splice(index, 1);
+  removeAuthor(id?: number): void {
+    if (id && confirm('Are you sure?')) {
+      this.authorsService.delete(id)
+        .then(() => this.update());
     }
   }
 
-
+  update(): void {
+    this.authorsService.getAll()
+      .then((data) => {
+        this.authors = data;
+      });
+  }
   ngOnInit(): void {
+    this.update();
   }
 
 }
