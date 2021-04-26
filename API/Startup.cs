@@ -31,6 +31,11 @@ namespace API
 
             services.AddScoped<IAuthorsRepository, AuthorsRepository>();
 
+<<<<<<< HEAD
+=======
+            services.AddScoped<IVirtualLibrariesRepository, VirtualLibrariesRepository>();
+
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddIdentityServices(Configuration);
@@ -60,10 +65,23 @@ namespace API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
 
+<<<<<<< HEAD
+=======
+            app.UseCors(policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+<<<<<<< HEAD
+=======
+            app.UseCors("CorsPolicy");
+
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
             app.UseAuthentication();
 
             app.UseAuthorization();

@@ -6,18 +6,27 @@
 					<h3>Create a new account</h3>
 				</div>
 				<div class="card-body">
+<<<<<<< HEAD
 					<form>
+=======
+					<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
+<<<<<<< HEAD
 							<input type="text" class="form-control" placeholder="username">
 
+=======
+							<input type="text" class="form-control" placeholder="displayname" formControlName="DisplayName">
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 						</div>
                         <div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-at"></i></span>
 							</div>
+<<<<<<< HEAD
 							<input type="email" class="form-control" placeholder="email">
 
 						</div>
@@ -35,6 +44,27 @@
 						</div>
 						<div class="form-group">
 							<input type="submit" value="Sign up" class="btn float-right login_btn">
+=======
+							<input type="email" class="form-control" placeholder="email" formControlName="Email">
+
+						</div>
+						<div formGroupName="Passwords">
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" class="form-control" placeholder="password" formControlName="Password" data-bs-toggle="tooltip" data-bs-html="true" title="Password must be at least 6 characters long, uppercase and special">
+							</div>
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" class="form-control" placeholder="confirm password" formControlName="ConfirmPassword" data-bs-toggle="tooltip" data-bs-html="true" title="Password must be at least 6 characters long, uppercase and special"> 
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Sign up" class="btn float-right login_btn" [disabled]="!service.formModel.valid">
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 						</div>
 					</form>
 				</div>

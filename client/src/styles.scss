@@ -14,6 +14,13 @@ body {
     background: rgb(252, 197, 104);
     background: linear-gradient(90deg, rgba(252, 197, 104, 1) 0%, rgba(255, 169, 63, 1) 100%);
 }
+<<<<<<< HEAD
+=======
+.gradient2 {
+    background: rgb(255,187,73);
+    background: linear-gradient(90deg, rgba(255,187,73,1) 7%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 65%, rgba(255,187,73,1) 93%);
+}
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
 
 .page-header {
     font-size: 1.25rem;
@@ -46,7 +53,11 @@ footer {
 }
 
 .wrapper {
+<<<<<<< HEAD
   padding: 15px;
+=======
+  //padding: 15px;
+>>>>>>> ccae311812251f519d42b999b10c866d9fb3c0df
   //64px-height of header, 70px-height of footer
   min-height: calc(100vh - 64px - 70px);
 }
