@@ -27,7 +27,7 @@ namespace API
 
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     await AppDbContextSeed.SeedUsersAsync(userManager);
-                    await AppDbContextSeed.SeedDataAsync(context, loggerFactory);
+                    await AppDbContextSeed.SeedDataAsync(context, userManager, loggerFactory);
                 }
                 catch (Exception ex)
                 {

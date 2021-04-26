@@ -16,12 +16,14 @@ namespace API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ITokenService _tokenService;
+        private readonly IVirtualLibrariesRepository _virtualLibRepo;
 
-        public AccountsController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
+        public AccountsController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService, IVirtualLibrariesRepository virtualLibRepo)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _virtualLibRepo = virtualLibRepo;
         }
 
         [HttpPost("login")]
@@ -56,6 +58,12 @@ namespace API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest();
+
+            var virtualLib = await _virtualLibRepo.CreateVirtualLibrary(user.Id);
+
+            user.VirtualLibraryId = virtualLib.Id;
+
+            await _userManager.UpdateAsync(user);
 
             return new UserDto
             {
