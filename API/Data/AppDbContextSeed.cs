@@ -170,6 +170,23 @@ namespace API.Data
                         await context.SaveChangesAsync();
                     }
                 }
+
+                if (!context.Avatars.Any())
+                {
+                    var avatars = new List<Avatar>
+                    {
+                        new Avatar{Url = "avatars/av-female.jpg"},
+                        new Avatar{Url = "avatars/av-female-2.jpg"},
+                        new Avatar{Url = "avatars/av-female-3.jpg"},
+                        new Avatar{Url = "avatars/av-male.jpg"},
+                        new Avatar{Url = "avatars/av-male-2.jpg"},
+                        new Avatar{Url = "avatars/av-male-3.jpg"}
+                    };
+
+                    context.AddRange(avatars);
+
+                    await context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
