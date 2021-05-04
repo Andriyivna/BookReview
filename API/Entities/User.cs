@@ -11,5 +11,7 @@ namespace API.Entities
         public Book FavouriteBook { get; set; }
         public int VirtualLibraryId { get; set; }
         public VirtualLibrary VirtualLibrary { get; set; }
+        public int? AvatarId { get; set; }
+        public Avatar Avatar { get; set; }
     }
 }
