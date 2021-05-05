@@ -12,6 +12,7 @@ namespace API.Dtos
         public string CoverImg { get; set; }
         public string Publisher { get; set; }
         public int ReleaseYear { get; set; }
+        public double AverangeRates { get; set; }
         public string Description { get; set; }
         public int AuthorId { get; set; }
         public int GenreId { get; set; }

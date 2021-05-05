@@ -161,7 +161,7 @@ namespace API.Data
                             {
                                 BookId = book.Id,
                                 VirtualLibraryId = virtualLibrary.Id,
-                                Status = VirtualLibraryBookStatus.CurrentlyReading
+                                Status = VirtualLibraryBookStatus.InProgress
                             });
                         };
 
