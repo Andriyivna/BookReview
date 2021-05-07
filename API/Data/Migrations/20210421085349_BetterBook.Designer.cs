@@ -4,19 +4,21 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210421085349_BetterBook")]
+    partial class BetterBook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("API.Entities.Author", b =>
@@ -37,19 +39,25 @@ namespace API.Data.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("API.Entities.Avatar", b =>
+            modelBuilder.Entity("API.Entities.BetterBook", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Url")
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Avatars");
+                    b.ToTable("BetterBooks");
                 });
 
             modelBuilder.Entity("API.Entities.Book", b =>
@@ -62,22 +70,10 @@ namespace API.Data.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<double>("AverangeRates")
-                        .HasColumnType("float");
-
                     b.Property<string>("CoverImg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Publisher")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReleaseYear")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -405,9 +401,6 @@ namespace API.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int?>("AvatarId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
@@ -419,8 +412,6 @@ namespace API.Data.Migrations
 
                     b.Property<int>("VirtualLibraryId")
                         .HasColumnType("int");
-
-                    b.HasIndex("AvatarId");
 
                     b.HasIndex("FavouriteBookId");
 
@@ -557,10 +548,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.User", b =>
                 {
-                    b.HasOne("API.Entities.Avatar", "Avatar")
-                        .WithMany()
-                        .HasForeignKey("AvatarId");
-
                     b.HasOne("API.Entities.Book", "FavouriteBook")
                         .WithMany("UsersWhoFavouritedBook")
                         .HasForeignKey("FavouriteBookId");
@@ -568,8 +555,6 @@ namespace API.Data.Migrations
                     b.HasOne("API.Entities.Quote", "FavouriteQuote")
                         .WithMany("UsersWhoFavouritedQuote")
                         .HasForeignKey("FavouriteQuoteId");
-
-                    b.Navigation("Avatar");
 
                     b.Navigation("FavouriteBook");
 

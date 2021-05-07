@@ -2,8 +2,8 @@
 {
     public enum VirtualLibraryBookStatus
     {
-        Read = 1,
-        CurrentlyReading,
-        ToRead
+        ToRead,
+        InProgress,
+        Done
     }
 }

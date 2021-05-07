@@ -4,14 +4,16 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210501125016_NewFields")]
+    partial class NewFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,21 +39,6 @@ namespace API.Data.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("API.Entities.Avatar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Avatars");
-                });
-
             modelBuilder.Entity("API.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -61,9 +48,6 @@ namespace API.Data.Migrations
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
-
-                    b.Property<double>("AverangeRates")
-                        .HasColumnType("float");
 
                     b.Property<string>("CoverImg")
                         .HasColumnType("nvarchar(max)");
@@ -405,9 +389,6 @@ namespace API.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int?>("AvatarId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
@@ -419,8 +400,6 @@ namespace API.Data.Migrations
 
                     b.Property<int>("VirtualLibraryId")
                         .HasColumnType("int");
-
-                    b.HasIndex("AvatarId");
 
                     b.HasIndex("FavouriteBookId");
 
@@ -557,10 +536,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.User", b =>
                 {
-                    b.HasOne("API.Entities.Avatar", "Avatar")
-                        .WithMany()
-                        .HasForeignKey("AvatarId");
-
                     b.HasOne("API.Entities.Book", "FavouriteBook")
                         .WithMany("UsersWhoFavouritedBook")
                         .HasForeignKey("FavouriteBookId");
@@ -568,8 +543,6 @@ namespace API.Data.Migrations
                     b.HasOne("API.Entities.Quote", "FavouriteQuote")
                         .WithMany("UsersWhoFavouritedQuote")
                         .HasForeignKey("FavouriteQuoteId");
-
-                    b.Navigation("Avatar");
 
                     b.Navigation("FavouriteBook");
 
