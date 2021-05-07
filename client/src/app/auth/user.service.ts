@@ -22,15 +22,18 @@ export class UserService {
     } ,{
       validators: [MustMatch('Password', 'ConfirmPassword'),StrongPassword('Password')]
     }     
-    )
+    ),
+    avatar : ['']
   });
 
   register(){
     var body = {
       displayName: this.formModel.value.DisplayName,
       email: this.formModel.value.Email,
-      password: this.formModel.value.Passwords.Password
+      password: this.formModel.value.Passwords.Password,
+      avatarId: this.formModel.value.avatar
     }
+    console.log(body);
     return this.http.post(this.BaseURL+'/Accounts/register',body);
     
   }
