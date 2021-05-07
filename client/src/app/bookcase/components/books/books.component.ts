@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VirtualLibraryService } from '../../services/virtual-library.service';
 import { AuthorsService } from '../../services/authors.service';
 import { Author } from '../authors/authors.component';
+import { Book } from '../../../book/book.component';
 
 export interface MyBook {
   id?: number;
@@ -11,6 +12,7 @@ export interface MyBook {
   author: string;
   genre: string;
   status: string;
+  virtualBookId?: number;
 }
 
 @Component({
@@ -27,6 +29,12 @@ export class BooksComponent implements OnInit {
   booksInProgress: Array<MyBook> = [];
   booksDone: Array<MyBook> = [];
 
+
+  changeStatus(id: number, status: string): void{
+      this.virtualLibraryService.put(id, status)
+        .then(() => this.update());
+  }
+
   update(): void {
     this.virtualLibraryService.getAll()
       .then((data) => {
@@ -34,7 +42,6 @@ export class BooksComponent implements OnInit {
         this.booksToRead = data.filter(book => book.status === 'ToRead');
         this.booksInProgress = data.filter(book => book.status === 'InProgress');
         this.booksDone = data.filter(book => book.status === 'Done');
-
       });
   }
   ngOnInit(): void {

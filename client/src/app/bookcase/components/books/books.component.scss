@@ -1,4 +1,33 @@
-.card-hover:hover {
- width:200px;
-  height: 293px;
+.book-card {
+  transform: scale(1);
+  box-shadow: none;
+  transition: 0.5s;
+
+}
+.book-card:hover{
+  transform: scale(1.1);
+  box-shadow: 0 0 10px 0px black;
+}
+
+a {
+  text-decoration: none;
+}
+a h6 {
+  color: #1d2857;
+
+
+}
+
+a p {
+  color: #1d2857;
+}
+
+.dropdown-card{
+  display: flex;
+  justify-content: space-between;
+}
+
+ngb-panel {
+  color: #1d2857;
+  text-decoration: none;
 }

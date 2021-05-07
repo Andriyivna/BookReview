@@ -15,6 +15,14 @@ export class VirtualLibraryService {
   constructor(private http: HttpClient) { }
   readonly ApiURL = 'https://localhost:5001/api/VirtualLibrary/';
 
+
+  put(id: number, status: string = ''): Promise<Book>{
+    return this.http.put<Book>(this.ApiURL, {
+      bookId: id,
+      status
+    }).toPromise();
+  }
+
   post(id: number, status: string = 'ToRead'): Promise<Book>{
     return this.http.post<Book>(this.ApiURL, {
       bookId: id,

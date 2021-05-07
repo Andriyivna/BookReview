@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorsService } from '../bookcase/services/authors.service';
 import { BookService } from './book.service';
 import { ActivatedRoute } from '@angular/router';
 import { VirtualLibraryService } from '../bookcase/services/virtual-library.service';
-import { Author } from '../bookcase/components/authors/authors.component';
-import { MyBook } from '../bookcase/components/books/books.component';
+
 
 export interface Book {
   id?: number;
