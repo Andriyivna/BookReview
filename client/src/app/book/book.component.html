@@ -1,22 +1,22 @@
-<body class="page-header gradient" style="height: auto;">
+<div class="page-header gradient" style="height: auto;" *ngIf="book">
     <div class="container pt-3"></div>
     <div class="container pt-3">
         <div class="row align-items-center justify-content-center">
             <div class="container bg-white box-shad">
                 <div class="row">
                     <div class="col-md- mg-t mg-l">
-                        <img src="assets/img/wiedzmin.jpg" alt="Cover image">
+                        <img src="{{book.coverImg}}" alt="Cover image">
                     </div>
                     <div class="col mg-t mg-r">
                         <div class="container bg-main">
                             <div class="row">
                                 <div class="col">
-                                    <p class="fnt b s-15 mg-t mg-b-0">Wiedźmin - Miecz Przeznaczenia</p>
+                                    <p class="fnt b s-15 mg-t mg-b-0">{{book.title}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col" style="margin-left: 5%;">
-                                    <p class="fnt mg-b">Andrzej Sapkowski</p>
+                                    <p class="fnt mg-b">{{book.author}}</p>
                                 </div>
                             </div>
                         </div>
@@ -26,29 +26,29 @@
                             </div>
                             <div class="row mg-b-0">
                                 <img src="http://pngimg.com/uploads/red_star/red_star_PNG12.png" width="18" height="18" style="margin-top: 10px;">
-                                <p class="fnt b s-115 red mg-b-0">8.2</p>
+                                <p class="fnt b s-115 red mg-b-0">{{book.averangeRates}}</p>
                                 <p class="fnt mg-b-0" style="margin-top: 5px;">/10</p>
                             </div>
                             <div class="row">
-                                <p class="fnt mg-b-0">Publisher: superNOWA</p>
+                                <p class="fnt mg-b-0">Publisher: {{book.publisher}}</p>
                             </div>
                             <div class="row">
-                                <p class="fnt mg-b-0">Release year: 2014</p>
+                                <p class="fnt mg-b-0">Release year: {{book.releaseYear}}</p>
                             </div>
                             <div class="row">
-                                <p class="fnt mg-b-0">Genre: Fantasy </p>
+                                <p class="fnt mg-b-0">Genre: {{book.genre}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mg-l-0">
                     <div class="col mg-l">
-                        <button class="btn"><p class="fnt mg-b-0">+ Add to my bookcase</p></button>
+                        <button class="btn"><p class="fnt mg-b-0" (click)="addToBookcase()">+ Add to my bookcase</p></button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        
+
                     </div>
                 </div>
                 <div class="row mg-t mg-b">
@@ -57,15 +57,7 @@
                     </div>
                 </div>
                 <div class="row mg-l mg-r">
-                    <p class="fnt">
-                        Wiedźmiński kodeks stawia tę sprawę w sposób jednoznaczny: wiedźminowi smoka zabijać się nie godzi.
-                        To gatunek zagrożony wymarciem. Aczkolwiek w powszechnej opinii to gad najbardziej wredny. Na oszluzgi, widłogony i latawce kodeks polować przyzwala.
-                        Ale na smoki – nie.
-                        Wiedźmin Geralt przyłącza się jednak do zorganizowanej przez króla Niedamira wyprawy na smoka, który skrył się w jaskiniach Gór Pustulskich. 
-                        Na swej drodze spotyka trubadura Jaskra oraz – jakżeby inaczej – czarodziejkę Yennefer. Wśród zaproszonych przez króla co sławniejszych smokobójców 
-                        jest Eyck z Denesle, rycerz bez skazy i zmazy, Rębacze z Cinfrid i szóstka krasnoludów pod komendą Yarpena Zigrina. Motywacje są różne, ale cel jeden.
-                        Smok nie ma szans.
-                    </p>
+                    <p class="fnt">{{book.description}}</p>
                 </div>
                 <div class="row mg-t mg-b">
                     <div class="col bg-main mg-l mg-r">
@@ -74,7 +66,7 @@
                 </div>
 
                 <div class="row mg-t mg-b">
-                    
+
                     <div class="col mg-l mg-r">
                         <div class="card">
                             <h5 class="card-header fnt">Add new review</h5>
@@ -108,7 +100,7 @@
                                 <button class="btn mg-t"><p class="fnt mg-b-0">Publish</p></button>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -123,24 +115,24 @@
                                 <p class="fnt s-115 b mg-b-0">Kocham te ksiazke!</p>
                             </div>
                             <div class="row-auto mg-l">
-                                <p class="fnt ar b s-115 red mg-b-0">9</p> 
+                                <p class="fnt ar b s-115 red mg-b-0">9</p>
                             </div>
                             <div class="row-auto">
-                                <p class="fnt al s-115 mg-b-0">/10</p> 
+                                <p class="fnt al s-115 mg-b-0">/10</p>
                             </div>
                         </div>
                         <div class="row">
                             <p class="fnt">Jeszcze lepsze niż poprzednia część!
 
-                                Z każdym opowiadaniem coraz bardziej zakochuję się w uniwersum wiedźmińskim i coraz bardziej docieram się ze stylem Pana Sapkowskiego, 
-                                bo - nie ukrywajmy - jest on jednak troszkę toporny. Uwielbiam nazywać go polskim Tolkienem, bo jak świat jest super i chce się to czytać, 
-                                bo przygody Geralta wciągają i intrygują i chce się całą książkę połknąć na raz, tak nie można tego zrobić, bo wszystko jest napisane powolnym 
-                                tempem i troszeczkę ciężkim piórem (co może być przełożeniem niektórych sentencji i rozważań narratora). Niemniej jednak naprawdę dobra pozycja 
+                                Z każdym opowiadaniem coraz bardziej zakochuję się w uniwersum wiedźmińskim i coraz bardziej docieram się ze stylem Pana Sapkowskiego,
+                                bo - nie ukrywajmy - jest on jednak troszkę toporny. Uwielbiam nazywać go polskim Tolkienem, bo jak świat jest super i chce się to czytać,
+                                bo przygody Geralta wciągają i intrygują i chce się całą książkę połknąć na raz, tak nie można tego zrobić, bo wszystko jest napisane powolnym
+                                tempem i troszeczkę ciężkim piórem (co może być przełożeniem niektórych sentencji i rozważań narratora). Niemniej jednak naprawdę dobra pozycja
                                 i polecam każdemu, aby przebrnął przez pierwszy tom (albo 0.5, jak kto woli), żeby potem się rozkochać w Wiedźminie w następnych tomach.</p>
                         </div>
                         </div>
                 </div>
-                
+
                 <div class="row mg-b">
                     <div class="col-sm-fluid mg-l">
                         <img class="av-s" src="assets\avatars\av-male-2.jpg">
@@ -152,14 +144,14 @@
                                 <p class="fnt s-115 b mg-b-0">Fajna</p>
                             </div>
                             <div class="row-auto mg-l">
-                                <p class="fnt ar b s-115 red mg-b-0">8</p> 
+                                <p class="fnt ar b s-115 red mg-b-0">8</p>
                             </div>
                             <div class="row-auto">
-                                <p class="fnt al s-115 mg-b-0">/10</p> 
+                                <p class="fnt al s-115 mg-b-0">/10</p>
                             </div>
                         </div>
                         <div class="row">
-                            <p class="fnt">Zdecydowanie lepsza część niż jedynka, język jest dla mnie bardziej do zniesienia. 
+                            <p class="fnt">Zdecydowanie lepsza część niż jedynka, język jest dla mnie bardziej do zniesienia.
                                 W tym tomie poznajemy też Ciri, więc bardzo mi się podobało! Już nie mogę się doczekać sagi!</p>
                         </div>
                         </div>
@@ -172,8 +164,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path fill="#fff" fill-opacity="1" d="M0,192L288,96L576,128L864,0L1152,64L1440,32L1440,320L1152,320L864,320L576,320L288,320L0,320Z"></path>
     </svg>
-</body>
+</div>
 
 
 
-   

@@ -56,6 +56,7 @@ export class AuthorsComponent implements OnInit {
         this.authors = data;
       });
   }
+
   ngOnInit(): void {
     this.update();
   }

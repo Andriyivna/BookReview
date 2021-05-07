@@ -14,6 +14,8 @@ namespace API.Dtos
         public int ReleaseYear { get; set; }
         public double AverangeRates { get; set; }
         public string Description { get; set; }
+        public string Author { get; set; }
+        public string Genre { get; set; }
         public int AuthorId { get; set; }
         public int GenreId { get; set; }
     }
