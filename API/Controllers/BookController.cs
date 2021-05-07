@@ -1,12 +1,17 @@
 ﻿using API.Data;
 using API.Dtos;
 using API.Entities;
+using API.Entities.Enums;
+using API.Interfaces;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -40,30 +45,31 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult<IReadOnlyList<BetterBook>> GetAllBooks()
         {
-            var books = _context.Books.ToList();
-            var dtobook = _mapper.Map<IReadOnlyList<Book>>(books);
+            var books = _context.Books.Include(a=>a.Author).Include(g=>g.Genre).ToList();
+            var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(books);
+            
             return Ok(dtobook);
         }
         [HttpGet("id/{id}")]
         public ActionResult<BetterBook> GetABookWithID(int id)
         {
-            var book = _context.Books.FirstOrDefault(p => p.Id == id);
+            var book = _context.Books.Include(a => a.Author).Include(g => g.Genre).FirstOrDefault(p => p.Id == id);
             if (book == null)
             {
                 return NotFound();
             }
-            var dtobook = _mapper.Map<Book>(book);
+            var dtobook = _mapper.Map<BetterBook>(book);
             return Ok(dtobook);
         }
         [HttpGet("title/{title}")]
         public ActionResult<BetterBook> GetABookWithTitle(string title)
         {
-            var book = _context.Books.FirstOrDefault(p => p.Title == title);
+            var book = _context.Books.Include(a => a.Author).Include(g => g.Genre).FirstOrDefault(p => p.Title == title);
             if (book == null)
             {
                 return NotFound();
             }
-            var dtobook = _mapper.Map<Book>(book);
+            var dtobook = _mapper.Map<BetterBook>(book);
             return Ok(dtobook);
         }
 
@@ -83,7 +89,7 @@ namespace API.Controllers
         [HttpDelete("id/{id}")]
         public IActionResult RemoveBookWithID(int id)
         {
-            var book = _context.Books.FirstOrDefault(p => p.Id == id);
+            var book = _context.Books.Include(a => a.Author).Include(g => g.Genre).FirstOrDefault(p => p.Id == id);
             if (book == null)
             {
                 return NotFound();
@@ -96,7 +102,7 @@ namespace API.Controllers
         [HttpDelete("title/{title}")]
         public IActionResult RemoveBookWithTitle(string title)
         {
-            var book = _context.Books.FirstOrDefault(p => p.Title == title);
+            var book = _context.Books.Include(a => a.Author).Include(g => g.Genre).FirstOrDefault(p => p.Title == title);
             if (book == null)
             {
                 return NotFound();
@@ -110,32 +116,40 @@ namespace API.Controllers
         [HttpGet("sort/rate/{order}")]
         public ActionResult<IReadOnlyList<BetterBook>> SortBooksWithRatingDescending(string order)
         {
-            int maxID = _context.Reviews.Max(u=>u.Id);
+            int maxID = _context.Books.Max(u=>u.Id);
+            int minID = _context.Books.Min(u => u.Id);
 
-            for (int i = 1; i <= maxID; i++)
+            for (int i = minID; i <= maxID; i++)
             {
-                var revies = _context.Reviews.Where(q => q.Id == i).ToList();
-                double averangeRate = 0;
-                foreach (var item in revies)
+                var revies = _context.Reviews.Where(q => q.BookId == i).ToList();
+                if (revies.Count>0)
                 {
-                    averangeRate += item.GivenRate;
+                    double averangeRate = 0;
+                    foreach (var item in revies)
+                    {
+                        averangeRate += item.GivenRate;
+                    }
+                    double rate = averangeRate / revies.Count;
+                    var book = _context.Books.Where(q => q.Id == i).FirstOrDefault();
+                    if (book != null)
+                    {
+                        book.AverangeRates = rate;
+                        _context.Books.Update(book);
+                        _context.SaveChanges();
+                    }
                 }
-                double rate = averangeRate / revies.Count;
-                var book = _context.Books.Where(q => q.Id == i).FirstOrDefault();
-                book.AverangeRates = rate;
-                _context.Books.Update(book);
             }
             if (order == "Descending")
             {
-                var sortedBooks = _context.Books.OrderByDescending(q => q.AverangeRates).ToList();
-                var dtobook = _mapper.Map<IReadOnlyList<Book>>(sortedBooks);
+                var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderByDescending(q => q.AverangeRates).ToList();
+                var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
                 return Ok(dtobook);
 
             }
             if (order == "Ascending")
             {
-                var sortedBooks = _context.Books.OrderBy(q=>q.Id).ToList();
-                var dtobook = _mapper.Map<IReadOnlyList<Book>>(sortedBooks);
+                var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderBy(q=>q.AverangeRates).ToList();
+                var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
                 return Ok(dtobook);
 
             }
@@ -145,22 +159,23 @@ namespace API.Controllers
         [HttpGet("sort/release")]
         public ActionResult<IReadOnlyList<BetterBook>> SortBooksWithRelease()
         {
-            var sortedBooks = _context.Books.OrderByDescending(q => q.ReleaseYear).ToList();
-            var dtobook = _mapper.Map<IReadOnlyList<Book>>(sortedBooks);
+            var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderByDescending(q => q.ReleaseYear).ToList();
+            var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
             return Ok(dtobook);
         }
         [HttpGet("filtreGenre/{genre}")]
         public ActionResult<IReadOnlyList<BetterBook>> FiltreBooksWithGenre(string genre)
         {
-            var filtredBooks = _context.Books.Where(q => q.Genre.Name==genre).ToList();
-            var dtobook = _mapper.Map<IReadOnlyList<Book>>(filtredBooks);
+            var filtredBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).Where(q => q.Genre.Name==genre).ToList();
+            var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
             return Ok(dtobook);
         }
         [HttpGet("filtreAuthor/{author}")]
         public ActionResult<IReadOnlyList<BetterBook>> FiltreBooksWithAuthor(string author)
         {
-            var filtredBooks = _context.Books.Where(q => q.Author.FirstName == author).ToList();
-            var dtobook = _mapper.Map<IReadOnlyList<Book>>(filtredBooks);
+            List<Book> filtredBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).Where(q => q.Author.FirstName.ToLower().Contains(author.ToLower())).ToList();
+            filtredBooks.AddRange(_context.Books.Include(a => a.Author).Include(g => g.Genre).Where(q => q.Author.SecondName.ToLower().Contains(author.ToLower())).ToList());
+            var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
             return Ok(dtobook);
         }
     }

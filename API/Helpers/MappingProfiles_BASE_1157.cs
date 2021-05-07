@@ -28,25 +28,6 @@ namespace API.Helpers
                     dest => dest.BookId,
                     opt => opt.MapFrom(src => src.Book.Id));
             CreateMap<VirtualBookAddDto, VirtualLibraryBook>();
-
-            CreateMap<Book, BetterBook>()
-                 .ForMember(
-                    dest => dest.Author,
-                    opt => opt.MapFrom(src => src.Author.FirstName + " " + src.Author.SecondName))
-                .ForMember(
-                    dest => dest.Genre,
-                    opt => opt.MapFrom(src => src.Genre.Name));
-           
-
-            CreateMap<User, UserDto>()
-                .ForMember(
-                    dest => dest.Avatar,
-                    opt => opt.MapFrom<AvatarUserUrlResolver>());
-            CreateMap<Avatar, AvatarDto>()
-                .ForMember(
-                    dest => dest.Url,
-                    opt => opt.MapFrom<AvatarUrlResolver>());
-
         }
     }
 }
