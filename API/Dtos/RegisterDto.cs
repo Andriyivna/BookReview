@@ -13,5 +13,7 @@ namespace API.Dtos
 
         [Required]
         public string Password { get; set; }
+
+        public int? AvatarId { get; set; }
     }
 }

@@ -22,6 +22,9 @@
 .mg-t-0 {
     margin-top: 0;
 }
+.mg-b-0 {
+    margin-bottom: 0;
+}
 .mg-l {
     margin-left: 2.5%;
 }
@@ -50,3 +53,47 @@
   .ar {
     text-align: right;
   }
+  .btn {
+      background:  #ffa93f;
+      border: none;
+      text-decoration: none;  
+  }
+
+  .starRating:not(old){
+    display        : inline-block;
+    width          : 300px;
+    height         : 1.5em;
+    overflow       : hidden;
+    vertical-align : bottom;
+  }
+  
+  .starRating:not(old) > input{
+    margin-right : -100%;
+    opacity      : 0;
+  }
+  
+  .starRating:not(old) > label{
+    display         : block;
+    float           : right;
+    position        : relative;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Empty_Star.svg');
+    background-size : contain;
+  }
+  
+  .starRating:not(old) > label:before{
+    content         : '';
+    display         : block;
+    width           : 1.5em;
+    height          : 1.5em;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/29/Gold_Star.svg');
+    background-size : contain;
+    opacity         : 0;
+    transition      : opacity 0.2s linear;
+  }
+  
+  .starRating:not(old) > label:hover:before,
+  .starRating:not(old) > label:hover ~ label:before,
+  .starRating:not(:hover) > :checked ~ label:before{
+    opacity : 1;
+  }
+  
