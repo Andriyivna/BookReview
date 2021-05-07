@@ -54,3 +54,20 @@ input:focus {
     margin-left: 4px;
     color: #b19544;
 }
+
+label {
+    cursor: pointer;
+    filter: grayscale(100%);
+}
+
+label:hover {
+    filter: grayscale(0);
+}
+
+input[type="radio"]:checked+label {
+    filter: grayscale(0);
+}
+
+h5 {
+    color: white;
+}
