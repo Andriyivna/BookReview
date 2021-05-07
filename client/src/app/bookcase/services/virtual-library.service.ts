@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MyBook } from '../components/books/books.component';
+import { Author } from '../components/authors/authors.component';
+import { Book } from '../../book/book.component';
 
 interface VirtualLibraryResponse {
   books: Array<MyBook>;
@@ -12,6 +14,13 @@ export class VirtualLibraryService {
 
   constructor(private http: HttpClient) { }
   readonly ApiURL = 'https://localhost:5001/api/VirtualLibrary/';
+
+  post(id: number, status: string = 'ToRead'): Promise<Book>{
+    return this.http.post<Book>(this.ApiURL, {
+      bookId: id,
+      status
+    }).toPromise();
+  }
 
   getAll(): Promise<Array<MyBook>>{
     return this.http.get<VirtualLibraryResponse>(this.ApiURL)

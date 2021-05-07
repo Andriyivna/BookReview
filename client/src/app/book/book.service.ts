@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from './book.component';
+import { Author } from '../bookcase/components/authors/authors.component';
 
 
 
