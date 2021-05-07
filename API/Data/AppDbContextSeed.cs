@@ -32,7 +32,7 @@ namespace API.Data
             try
             {
                 List<Author> authors = context.Authors.ToList();
-                if (!context.Authors.Any())
+                if (!context.Authors.Any(q=>q.SecondName== "Rowling"))
                 {
                     authors = new List<Author>
                     {
@@ -63,7 +63,7 @@ namespace API.Data
                     await context.SaveChangesAsync();
                 }
                 List<Genre> genres = context.Genres.ToList();
-                if (!context.Genres.Any())
+                if (!context.Genres.Any(q=>q.Name== "Fantasy"))
                 {
                     genres = new List<Genre>
                     {
@@ -90,7 +90,7 @@ namespace API.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.Books.Any())
+                if (!context.Books.Any(q=>q.Title== "Kwiaty dla Alegerona"))
                 {
 
                     var books = new List<Book>
@@ -99,10 +99,8 @@ namespace API.Data
                         {
                             Title = "Kwiaty dla Alegerona",
                             AuthorId = authors[0].Id ,
-                             //Author=context.Authors.Where(q=>q.Id==authors[0].Id).FirstOrDefault(),
-                            CoverImg = "client/src/assets/img/KwiatydlaAlgernona.jpg",
+                            CoverImg = "/assets/img/KwiatydlaAlgernona.jpg",
                             GenreId = genres[0].Id,
-                           // Genre=  context.Genres.Where(q=>q.Name=="Literatura obyczajowa").FirstOrDefault(),
                             Publisher="Nowa Era",
                             Description="Trzydziestodwuletni Charlie Gordon jest upośledzony umysłowo, ma iloraz inteligencji na poziomie 68 punktów. Uczy się czytać i pisać na zajęciach w Beekman College. Dwaj naukowcy z tej uczelni, doktor Nemur i doktor Strauss, prowadzą badania nad wzrostem inteligencji. Udało im się już za pomocą zabiegu chirurgicznego zwiększyć zdolności umysłowe myszy o imieniu Algernon i teraz chcą przeprowadzić taki sam eksperyment z człowiekiem.",
                             ReleaseYear=2005
@@ -111,10 +109,8 @@ namespace API.Data
                         {
                             Title = "Harry Potter",
                             AuthorId = authors[1].Id ,
-                            // Author=context.Authors.Where(q=>q.Id==authors[1].Id).FirstOrDefault(),
-                            CoverImg = "client/src/assets/img/harryPotter.jpg",
+                            CoverImg = "/assets/img/harryPotter.jpg",
                             GenreId = genres[1].Id,
-                           // Genre=  context.Genres.Where(q=>q.Id==genres[1].Id).FirstOrDefault(),
                             Publisher="Nowa Era",
                             Description= "Książka „Harry Potter i Kamień Filozoficzny” rozpoczyna cykl o młodym czarodzieju i jego licznych przygodach. Tytułowy Harry Potter wychowywany jest przez nieprzychylnych mu ciotkę i wuja. Jego rodzice zginęli w tajemniczych okolicznościach, a jedyne, co mu po nich pozostało to blizna na czole w kształcie błyskawicy. W dniu swoich 11. urodzin bohater dowiaduje się, że istnieje świat, o którym nie miał pojęcia",
                             ReleaseYear=2006
@@ -123,10 +119,8 @@ namespace API.Data
                         {
                             Title = "Miecz Przeznaczenia",
                             AuthorId = authors[2].Id ,
-                            // Author=context.Authors.Where(q=>q.Id==authors[2].Id).FirstOrDefault(),
-                            CoverImg = "client/src/assets/img/harryPotter.jpg",
+                            CoverImg = "/assets/img/wiedzmin.jpg",
                             GenreId = genres[1].Id,
-                           // Genre=  context.Genres.Where(q=>q.Id==genres[1].Id).FirstOrDefault(),
                             Publisher="Mag",
                             Description= "Wiedźmiński kodeks stawia tę sprawę w sposób jednoznaczny: wiedźminowi smoka zabijać się nie godzi. To gatunek zagrożony wymarciem. Aczkolwiek w powszechnej opinii to gad najbardziej wredny. Na oszluzgi, widłogony i latawce kodeks polować przyzwala. Ale na smoki – nie. Wiedźmin Geralt przyłącza się jednak do zorganizowanej przez króla Niedamira wyprawy na smoka, który skrył się w jaskiniach Gór Pustulskich. Na swej drodze spotyka trubadura Jaskra oraz – jakżeby inaczej – czarodziejkę Yennefer. Wśród zaproszonych przez króla co sławniejszych smokobójców jest Eyck z Denesle, rycerz bez skazy i zmazy, Rębacze z Cinfrid i szóstka krasnoludów pod komendą Yarpena Zigrina. Motywacje są różne, ale cel jeden. Smok nie ma szans.",
                             ReleaseYear=2003
@@ -135,10 +129,8 @@ namespace API.Data
                         {
                             Title = "Drużyna pierścienia",
                             AuthorId = authors[3].Id ,
-                            // Author=context.Authors.Where(q=>q.Id==authors[3].Id).FirstOrDefault(),
-                            CoverImg = "client/src/assets/img/bractwoPierscienia.jpg",
+                            CoverImg = "/assets/img/bractwoPierscienia.jpg",
                             GenreId = genres[1].Id,
-                           // Genre=  context.Genres.Where(q=>q.Id==genres[1].Id).FirstOrDefault(),
                             Publisher="Mag",
                             Description= "W zamierzchłych czasach kowale elfów wykuli Pierścienie Mocy. Lecz Mroczny Władca, stworzył w tajemnicy Jedyny Pierścień, napełniając go swą potęgą, aby rządził pozostałymi. Ale Pierścień zniknął i przepadł gdzieś w Śródziemiu.Minęło wiele wieków, zanim się odnalazł i trafi ł w ręce hobbita, którego przeznaczeniem stała się wędrówka do Krainy Cienia, by zniszczyć Jedyny Pierścień...",
                             ReleaseYear =1954
