@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using API.Entities;
 using AutoMapper;
+using System;
 
 namespace API.Helpers
 {
@@ -46,7 +47,11 @@ namespace API.Helpers
                 .ForMember(
                     dest => dest.Url,
                     opt => opt.MapFrom<AvatarUrlResolver>());
-
+            CreateMap<ReviewAddDto, Review>()
+                .ForMember(
+                    dest => dest.GivenRate,
+                    opt => opt.MapFrom(src => Math.Round(src.GivenRate, 1)));
+            CreateMap<Review, ReviewReturnDto>();
         }
     }
 }

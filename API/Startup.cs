@@ -33,6 +33,8 @@ namespace API
 
             services.AddScoped<IAuthorsRepository, AuthorsRepository>();
 
+            services.AddScoped<IReviewsRepository, ReviewsRepository>();
+
             services.AddScoped<IVirtualLibrariesRepository, VirtualLibrariesRepository>();
 
             services.AddScoped<ITokenService, TokenService>();
