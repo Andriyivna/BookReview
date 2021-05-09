@@ -52,6 +52,7 @@ namespace API.Helpers
                     dest => dest.GivenRate,
                     opt => opt.MapFrom(src => Math.Round(src.GivenRate, 1)));
             CreateMap<Review, ReviewReturnDto>();
+            CreateMap<Genre, GenreDto>();
         }
     }
 }
