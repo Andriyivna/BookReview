@@ -5,15 +5,17 @@ import { BookcaseComponent } from './components/bookcase/bookcase.component';
 import { AuthorsComponent } from './components/authors/authors.component';
 import { BooksComponent } from './components/books/books.component';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @NgModule({
   declarations: [BookcaseComponent, AuthorsComponent, BooksComponent],
-  imports: [
-    FormsModule,
-    CommonModule,
-    BookcaseRoutingModules
-  ]
+    imports: [
+        FormsModule,
+        CommonModule,
+        BookcaseRoutingModules,
+        NgbModule,
+    ],
 })
 export class BookcaseModule { }

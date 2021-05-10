@@ -28,18 +28,16 @@ body {
     font-family: 'Roboto', monospace;
 }
 
-
-.book-card .card-img-top {
-    padding: 20px;
+.card-body{
+  padding: 2px;
 }
-
 .book-card-section,
 .quote-section {
     padding-bottom: 220px;
 }
 
 .card-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 footer {
