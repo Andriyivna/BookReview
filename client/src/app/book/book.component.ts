@@ -35,7 +35,7 @@ export class BookComponent implements OnInit {
 
   addToBookcase(): void{
     if (this.book.id){
-      this.virtualLibraryServices.post(this.book.id)
+      this.virtualLibraryServices.add(this.book.id)
         .then(() => this.update());
     }
   }
