@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BookComponent } from './book/book.component';
+import { AddBookComponent } from './add-book/add-book.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'book/:id', component: BookComponent }
+  { path: 'book/:id', component: BookComponent },
+  { path: 'add-book', component: AddBookComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,89 @@
+<div class="wrapper gradient">
+    <header class="fnt ">
+        <div class="container pt-4"></div>
+        <div class="d-flex justify-content-center h-100 pt-5">
+            <div class="card box-shad pt-3">
+                <div class="row align-items-center justify-content-center">
+                    <h2>New book:</h2>
+                </div>
+                <div class="row align-items-center justify-content-center pt-3">
+                    <form [formGroup]="addBookForm" autocomplete="off" (submit)="onSubmit()">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-heading"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Title" formControlName="title">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-pen-fancy"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Publisher" formControlName="publisher">
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-at"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Release Year"
+                                formControlName="releaseYear">
+
+                        </div>
+
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <select class="custom-select" id="author" formControlName="authorId"
+                                [(ngModel)]='nrSelectAuth'>
+                                <option *ngFor="let author of authors" value="{{author.id}}">{{author.firstName}}
+                                    {{author.secondName}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-align-left"></i></span>
+                            </div>
+                            <select class="custom-select" id="author" formControlName="genreId"
+                                [(ngModel)]='nrSelectGen'>
+                                <option *ngFor="let genre of genres" value="{{genre.id}}">{{genre.name}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-upload"></i></span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                    formControlName="coverImg">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose cover image</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea class="form-control" id="description" rows="3"
+                                formControlName="description"></textarea>
+                        </div>
+                        <div class="form-group pb-2">
+                            <input type="submit" value="Submit" [disabled]="addBookForm.invalid"
+                                class="btn btn-dark btn-md col-12">
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4">
+            <div class="d-flex justify-content-center pt-3">
+                <div class="col-4">
+                    <p *ngIf="isSent">
+                        <ngb-alert [type]="alert.type">{{ alert.message }}</ngb-alert>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </header>
+</div>

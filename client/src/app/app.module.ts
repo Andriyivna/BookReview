@@ -14,13 +14,15 @@ import { BookcaseModule } from './bookcase/bookcase.module';
 import { UserService } from './auth/user.service';
 import { BookComponent } from './book/book.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AddBookComponent } from './add-book/add-book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    BookComponent
+    BookComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
