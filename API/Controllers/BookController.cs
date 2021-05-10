@@ -31,7 +31,7 @@ namespace API.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult AddBook(BetterBook book)
+        public IActionResult AddBook(AddBook book)
         {
             if (!ModelState.IsValid)
             {
@@ -133,7 +133,7 @@ namespace API.Controllers
                     var book = _context.Books.Where(q => q.Id == i).FirstOrDefault();
                     if (book != null)
                     {
-                        book.AverangeRates = rate;
+                        book.AverageRates = rate;
                         _context.Books.Update(book);
                         _context.SaveChanges();
                     }
@@ -141,14 +141,14 @@ namespace API.Controllers
             }
             if (order == "Descending")
             {
-                var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderByDescending(q => q.AverangeRates).ToList();
+                var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderByDescending(q => q.AverageRates).ToList();
                 var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
                 return Ok(dtobook);
 
             }
             if (order == "Ascending")
             {
-                var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderBy(q=>q.AverangeRates).ToList();
+                var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderBy(q=>q.AverageRates).ToList();
                 var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
                 return Ok(dtobook);
 

@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace API.Entities
+namespace API.Dtos
 {
-    public class Book
+    public class AddBook
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,9 +15,6 @@ namespace API.Entities
         public double AverageRates { get; set; }
         public string Description { get; set; }
         public int AuthorId { get; set; }
-        public Author Author { get; set; }
         public int GenreId { get; set; }
-        public Genre Genre { get; set; }
-        public ICollection<User> UsersWhoFavouritedBook { get; set; }
     }
 }

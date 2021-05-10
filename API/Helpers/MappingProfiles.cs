@@ -37,8 +37,8 @@ namespace API.Helpers
                 .ForMember(
                     dest => dest.Genre,
                     opt => opt.MapFrom(src => src.Genre.Name));
-           
 
+            CreateMap<Book, AddBook>().ReverseMap();
             CreateMap<User, UserDto>()
                 .ForMember(
                     dest => dest.Avatar,
