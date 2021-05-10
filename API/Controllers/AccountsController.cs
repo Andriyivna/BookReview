@@ -89,6 +89,42 @@ namespace API.Controllers
             return _mapper.Map<UserDto>(user);
         }
 
+        [HttpPatch("password")]
+        [Authorize]
+        public async Task<ActionResult> UpdateUserPassword(UserPasswordUpdateDto userToUpdate)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _userManager.FindByEmailWithFavouritesAndVirtualLibrary(email);
+
+            await _userManager.ChangePasswordAsync(user, userToUpdate.CurrentPassword, userToUpdate.NewPassword);
+
+            return NoContent();
+        }
+
+        [HttpPatch("profile")]
+        [Authorize]
+        public async Task<ActionResult> UpdateUserProfile(UserProfileUpdateDto userToUpdate)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _userManager.FindByEmailWithFavouritesAndVirtualLibrary(email);
+
+            if (!string.IsNullOrEmpty(userToUpdate.DisplayName))
+            {
+                user.DisplayName = userToUpdate.DisplayName;
+            }
+
+            if (userToUpdate.AvatarId != null)
+            {
+                user.AvatarId = userToUpdate.AvatarId;
+            }
+
+            await _userManager.UpdateAsync(user);
+
+            return NoContent();
+        }
+
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckIfEmailExistsAsync([FromQuery] string email)
         {
