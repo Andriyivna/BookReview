@@ -31,7 +31,7 @@ export class BooksComponent implements OnInit {
 
 
   changeStatus(id: number, status: string): void{
-      this.virtualLibraryService.post(id, status)
+      this.virtualLibraryService.changeStatus(id, status)
         .then(() => this.update());
   }
 
