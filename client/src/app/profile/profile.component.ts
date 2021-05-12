@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
         if(res['avatar'] != null)
           this.avatarUrl = res['avatar'];
       } );
-      
     }
   }
 
