@@ -159,7 +159,7 @@ namespace API.Controllers
                 var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderBy(q=>q.AverageRates).ToList();
                 var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
                 return Ok(dtobook);
-
+              
             }
             return BadRequest();
            
@@ -186,5 +186,6 @@ namespace API.Controllers
             var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
             return Ok(dtobook);
         }
+
     }
 }

@@ -1,3 +1,9 @@
+<ng-template #addbook>
+  <div class="col mg-l">
+    <button class="btn"><p class="fnt mg-b-0" (click)="addToBookcase()">+ Add to my bookcase</p></button>
+  </div>
+</ng-template>
+
 <div class="page-header gradient" style="height: auto;" *ngIf="book">
     <div class="container pt-3"></div>
     <div class="container pt-3">
@@ -26,7 +32,7 @@
                             </div>
                             <div class="row mg-b-0">
                                 <img src="http://pngimg.com/uploads/red_star/red_star_PNG12.png" width="18" height="18" style="margin-top: 10px;">
-                                <p class="fnt b s-115 red mg-b-0">{{book.averangeRates}}</p>
+                                <p class="fnt b s-115 red mg-b-0">{{book.averageRates}}</p>
                                 <p class="fnt mg-b-0" style="margin-top: 5px;">/10</p>
                             </div>
                             <div class="row">
@@ -41,10 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mg-l-0">
-                    <div class="col mg-l">
-                        <button class="btn"><p class="fnt mg-b-0" (click)="addToBookcase()">+ Add to my bookcase</p></button>
-                    </div>
+                <div class="row mg-l-0" *ngIf="!isAdded then addbook">
                 </div>
                 <div class="row">
                     <div class="col">
