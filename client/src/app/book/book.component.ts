@@ -29,9 +29,7 @@ export class BookComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
-    private virtualLibraryServices: VirtualLibraryService,
-  ) {
-  }
+    private virtualLibraryServices: VirtualLibraryService ) { }
 
   book: Book = null;
   isAdded: boolean = false;
@@ -62,6 +60,10 @@ export class BookComponent implements OnInit {
           }
         });
       });
+  }
+
+  publish(): void{
+
   }
 
 }
