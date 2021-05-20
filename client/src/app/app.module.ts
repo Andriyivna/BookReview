@@ -15,6 +15,7 @@ import { UserService } from './auth/user.service';
 import { BookComponent } from './book/book.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AddBookComponent } from './add-book/add-book.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddBookComponent } from './add-book/add-book.component';
     HomeComponent,
     ProfileComponent,
     BookComponent,
-    AddBookComponent
+    AddBookComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
