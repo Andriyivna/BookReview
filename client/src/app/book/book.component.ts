@@ -3,6 +3,7 @@ import {BookService} from './book.service';
 import {ActivatedRoute} from '@angular/router';
 import {VirtualLibraryService} from '../bookcase/services/virtual-library.service';
 import {MyBook} from '../bookcase/components/books/books.component';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 
 
 export interface Book {
@@ -18,6 +19,13 @@ export interface Book {
   author: string;
   genre: string;
 }
+export interface Review {
+givenRate: number;
+content: string;
+bookID: number;
+avatar: string;
+displayName: string;
+}
 
 @Component({
   selector: 'app-book',
@@ -32,37 +40,53 @@ export class BookComponent implements OnInit {
     private virtualLibraryServices: VirtualLibraryService ) { }
 
   book: Book = null;
-  isAdded: boolean = false;
-
+  reviews: Review[] = [];
+  booksAdded: boolean = false;
+  reviewAdded: boolean = false;
+  review: Review = null;
   addToBookcase(): void {
     if (this.book.id) {
       this.virtualLibraryServices.add(this.book.id)
         .then(() => this.update());
-      this.isAdded = true;
+      this.booksAdded = true;
     }
   }
 
   update(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id') as string, 10);
     this.bookService.get(id)
-      .then((data) => {
+      .then(async (data) => {
         this.book = data;
+        this.reviews = await this.bookService.getReviews(this.book.id).toPromise();
+        this.reviews.forEach((item) => {
+          if (item.displayName ==  localStorage.getItem('displayName')){
+            this.reviewAdded = true;
+          }
+        });
+        console.log('review', this.reviews);
       });
   }
 
-  ngOnInit(): void {
+ async ngOnInit(): Promise<void> {
     this.update();
     this.virtualLibraryServices.getAll()
       .then((data) => {
         data.forEach((item) => {
           if (item.bookId == this.book.id) {
-            this.isAdded = true;
+            this.booksAdded = true;
           }
         });
       });
+
+
   }
 
-  publish(): void{
+
+  publish(form: NgForm): void{
+    this.review = form.value;
+    this.review.bookID = this.book.id;
+    this.review.givenRate = +this.review.givenRate;
+    this.bookService.addReview(this.review);
 
   }
 
