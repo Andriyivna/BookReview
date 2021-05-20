@@ -13,4 +13,7 @@ export class BookService {
   get(id: number): Promise<Book>{
     return this.http.get<Book>(this.ApiURL + 'id/' + id).toPromise();
   }
+  getHighRateBook(count: number): Promise<Book[]>{
+    return this.http.get<Book[]>(this.ApiURL + 'high/rate/' + count).toPromise();
+  }
 }
