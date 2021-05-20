@@ -34,20 +34,30 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <select class="custom-select" id="author" formControlName="authorId"
+                            <!-- <select class="custom-select" id="author" formControlName="authorId"
                                 [(ngModel)]='nrSelectAuth'>
                                 <option *ngFor="let author of authors" value="{{author.id}}">{{author.firstName}}
                                     {{author.secondName}}</option>
-                            </select>
+                            </select> -->
+                            <input class="form-control" list="authDatalistOptions" id="authorDataList"
+                                placeholder="Author" formControlName="authorId">
+                            <datalist id="authDatalistOptions">
+                                <option *ngFor="let author of authors" value="{{author.firstName}} {{author.secondName}}"></option>
+                            </datalist>
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-align-left"></i></span>
                             </div>
-                            <select class="custom-select" id="author" formControlName="genreId"
+                            <!-- <select class="custom-select" id="author" formControlName="genreId"
                                 [(ngModel)]='nrSelectGen'>
                                 <option *ngFor="let genre of genres" value="{{genre.id}}">{{genre.name}}</option>
-                            </select>
+                            </select> -->
+                            <input class="form-control" list="datalistOptions" id="genreDataList"
+                                placeholder="Genre" formControlName="genreId">
+                            <datalist id="datalistOptions">
+                                <option *ngFor="let genre of genres" value="{{genre.name}}"></option>
+                            </datalist>
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">

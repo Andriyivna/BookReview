@@ -4,6 +4,19 @@ import { Router } from '@angular/router';
 import { Author } from '../bookcase/components/authors/authors.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+export interface Book {
+  id?: number;
+  title: string;
+  coverImg: string;
+  publisher: string;
+  releaseYear: number;
+  averangeRates: number;
+  authorId: number;
+  description: string;
+  genreId: number;
+  author: string;
+  genre: string;
+}
 export interface Genre {
   id?: number;
   name: string;
@@ -66,8 +79,6 @@ export class AddBookComponent implements OnInit {
       averageRates: 0
     })
 
-    this.addBookForm.valueChanges.subscribe(console.log)
-
     this.update();
   }
 
@@ -82,19 +93,37 @@ export class AddBookComponent implements OnInit {
       });
   }
   str: any;
+  bookId: any;
   addBook(){
+    var genre:any;
+    var formValue:any;
+
     this.str = this.addBookForm.get('coverImg').value.split( '\\' );
-    const formValue = this.addBookForm.value;
+    formValue = this.addBookForm.value;
     formValue['coverImg'] = this.str[this.str.length-1];
-    //this.addBookForm.reset();
+    
+    for(var i = 0; i < this.genres.length; i++){
+      if(this.genres[i].name == formValue['genreId']){
+        formValue['genreId'] = this.genres[i].id;
+        break;
+      }
+    }
+    for(var i = 0; i < this.authors.length; i++){
+      if(this.authors[i].firstName + ' ' +this.authors[i].secondName == formValue['authorId']){
+        formValue['authorId'] = this.authors[i].id;
+        break;
+      }
+    }
     return this.http.post(this.ApiURL+'/Book/add',formValue);
   }
-
+  fetchedBook: Book;
   onSubmit() {
     this.addBook().subscribe(
       (res:any) =>{
-        this.addBookForm.reset();
         this.isSent = true;
+        this.getBook(this.addBookForm.get('title').value).then(data => {
+          this.router.navigateByUrl('/book/'+data.id)
+        })
       },
       err => {
         console.log(err);
@@ -102,6 +131,9 @@ export class AddBookComponent implements OnInit {
     )
   }
 
+  getBook(title:string): Promise<Book>{
+    return this.http.get<Book>(this.ApiURL+'/Book/title/'+title).toPromise();
+  }
   getAll(): Promise<Array<Author>>{
     return this.http.get<Array<Author>>(this.ApiURL+'/Authors/').toPromise();
   }
