@@ -50,6 +50,14 @@ namespace API.Controllers
             
             return Ok(dtobook);
         }
+        [HttpGet("high/rate/{count}")]
+        public ActionResult<IReadOnlyList<BetterBook>> GetHighRatesBooks(int count)
+        {
+            var books = _context.Books.OrderByDescending(q=>q.AverageRates).Take(count).ToList();
+            var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(books);
+
+            return Ok(dtobook);
+        }
         [HttpGet("id/{id}")]
         public ActionResult<BetterBook> GetABookWithID(int id)
         {
@@ -151,7 +159,7 @@ namespace API.Controllers
                 var sortedBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).OrderBy(q=>q.AverageRates).ToList();
                 var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(sortedBooks);
                 return Ok(dtobook);
-
+              
             }
             return BadRequest();
            
@@ -178,5 +186,6 @@ namespace API.Controllers
             var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
             return Ok(dtobook);
         }
+
     }
 }

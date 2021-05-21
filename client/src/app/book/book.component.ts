@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from './book.service';
-import { ActivatedRoute } from '@angular/router';
-import { VirtualLibraryService } from '../bookcase/services/virtual-library.service';
+import {Component, OnInit} from '@angular/core';
+import {BookService} from './book.service';
+import {ActivatedRoute} from '@angular/router';
+import {VirtualLibraryService} from '../bookcase/services/virtual-library.service';
+import {MyBook} from '../bookcase/components/books/books.component';
 
 
 export interface Book {
@@ -10,7 +11,7 @@ export interface Book {
   coverImg: string;
   publisher: string;
   releaseYear: number;
-  averangeRates: number;
+  averageRates: number;
   authorId: number;
   description: string;
   genreId: number;
@@ -29,14 +30,17 @@ export class BookComponent implements OnInit {
     private bookService: BookService,
     private route: ActivatedRoute,
     private virtualLibraryServices: VirtualLibraryService,
-  ) { }
+  ) {
+  }
 
   book: Book = null;
+  isAdded: boolean = false;
 
-  addToBookcase(): void{
-    if (this.book.id){
+  addToBookcase(): void {
+    if (this.book.id) {
       this.virtualLibraryServices.add(this.book.id)
         .then(() => this.update());
+      this.isAdded = true;
     }
   }
 
@@ -50,6 +54,14 @@ export class BookComponent implements OnInit {
 
   ngOnInit(): void {
     this.update();
+    this.virtualLibraryServices.getAll()
+      .then((data) => {
+        data.forEach((item) => {
+          if (item.bookId == this.book.id) {
+            this.isAdded = true;
+          }
+        });
+      });
   }
 
 }

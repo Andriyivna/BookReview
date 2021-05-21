@@ -27,46 +27,46 @@
     </div>
 
     <div class="container">
-        <div class="row justify-content-center ">
-            <div class="col-lg-3 col-md-4 col-6">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-4 col-6" *ngFor="let book of books">
                 <div class="card book-card mx-auto my-3" >
-                    <img src="assets/img/KwiatydlaAlgernona.jpg" class="card-img-top" alt="...">
+                    <img src="{{book.coverImg}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Kwiaty dla Algernona  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 5</span></h5>
+                        <h5 class="card-title">{{book.title}} <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> {{book.averageRates}}</span></h5>
                         <p class="card-text"> D.Keys</p>
-                        <a href="#" class="btn btn-warning">Read more</a>
+                        <a [routerLink]="['/book', book.id]" class="btn btn-warning">Read more</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="card book-card mx-auto my-3" >
-                    <img src="assets/img/harryPotter.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Harry Potter  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4.5</span></h5>
-                        <p class="card-text">J.K.Rowling</p>
-                        <a href="#" class="btn btn-warning">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="card book-card mx-auto my-3" >
-                    <img src="assets/img/wiedzmin.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Wiedźmin  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4</span></h5>
-                        <p class="card-text">A.Sapkowski</p>
-                        <a href="#" class="btn btn-warning">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="card book-card mx-auto my-3" >
-                    <img src="assets/img/bractwoPierscienia.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Władca Pierścieni  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4</span></h5>
-                        <p class="card-text"> J.R.R.Tolkien</p>
-                        <a href="#" class="btn  btn-warning">Read more</a>
-                    </div>
-                </div>
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-6">-->
+<!--                <div class="card book-card mx-auto my-3" >-->
+<!--                    <img src="assets/img/harryPotter.jpg" class="card-img-top" alt="...">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Harry Potter  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4.5</span></h5>-->
+<!--                        <p class="card-text">J.K.Rowling</p>-->
+<!--                        <a href="#" class="btn btn-warning">Read more</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-6">-->
+<!--                <div class="card book-card mx-auto my-3" >-->
+<!--                    <img src="assets/img/wiedzmin.jpg" class="card-img-top" alt="...">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Wiedźmin  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4</span></h5>-->
+<!--                        <p class="card-text">A.Sapkowski</p>-->
+<!--                        <a href="#" class="btn btn-warning">Read more</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-6">-->
+<!--                <div class="card book-card mx-auto my-3" >-->
+<!--                    <img src="assets/img/bractwoPierscienia.jpg" class="card-img-top" alt="...">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Władca Pierścieni  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4</span></h5>-->
+<!--                        <p class="card-text"> J.R.R.Tolkien</p>-->
+<!--                        <a href="#" class="btn  btn-warning">Read more</a>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
