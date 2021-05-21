@@ -1,4 +1,5 @@
-﻿using API.Dtos;
+﻿using API.Data;
+using API.Dtos;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -19,12 +21,14 @@ namespace API.Controllers
         private readonly IReviewsRepository _repo;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
-        public ReviewsController(IReviewsRepository repo, UserManager<User> userManager, IMapper mapper)
+        public ReviewsController(IReviewsRepository repo, UserManager<User> userManager, IMapper mapper, AppDbContext context)
         {
             _repo = repo;
             _userManager = userManager;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -43,7 +47,15 @@ namespace API.Controllers
             var reviewsFromDb = await _repo.GetReviewsByBookIdAsync(bookId);
 
             var data = _mapper.Map<IReadOnlyList<ReviewReturnDto>>(reviewsFromDb);
-
+            foreach (var item in data)
+            {
+                var email = User.FindFirstValue(ClaimTypes.Email);
+                var user = await _userManager.FindByEmailAsync(email);
+                item.DisplayName = user.DisplayName;
+                var avatar = _context.Avatars.Where(q => q.Id == user.AvatarId).FirstOrDefault();
+                item.Avatar = avatar.Url;
+                
+            }
             return Ok(data);
         }
 

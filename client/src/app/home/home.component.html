@@ -4,7 +4,7 @@
             <div class="col-lg-6 col-md-6">
                 <h2>Read-it!</h2>
                 <p>A great choice for those, who want to organize their own bookcase and might share an opinion about a publication they've recently read.</p>
-                <button type="button" routerLink="/register" class="btn btn-outline-dark btn-lg" [disabled]="isLoggedIn">
+                <button type="button" routerLink="/register" class="btn btn-outline-dark btn-lg"  [hidden]="isLoggedIn">
                     Sign up for free
                 </button>
             </div>
@@ -37,36 +37,6 @@
                         <a [routerLink]="['/book', book.id]" class="btn btn-warning">Read more</a>
                     </div>
                 </div>
-<!--            </div>-->
-<!--            <div class="col-lg-3 col-md-4 col-6">-->
-<!--                <div class="card book-card mx-auto my-3" >-->
-<!--                    <img src="assets/img/harryPotter.jpg" class="card-img-top" alt="...">-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title">Harry Potter  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4.5</span></h5>-->
-<!--                        <p class="card-text">J.K.Rowling</p>-->
-<!--                        <a href="#" class="btn btn-warning">Read more</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-lg-3 col-md-4 col-6">-->
-<!--                <div class="card book-card mx-auto my-3" >-->
-<!--                    <img src="assets/img/wiedzmin.jpg" class="card-img-top" alt="...">-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title">Wiedźmin  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4</span></h5>-->
-<!--                        <p class="card-text">A.Sapkowski</p>-->
-<!--                        <a href="#" class="btn btn-warning">Read more</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-lg-3 col-md-4 col-6">-->
-<!--                <div class="card book-card mx-auto my-3" >-->
-<!--                    <img src="assets/img/bractwoPierscienia.jpg" class="card-img-top" alt="...">-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title">Władca Pierścieni  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 4</span></h5>-->
-<!--                        <p class="card-text"> J.R.R.Tolkien</p>-->
-<!--                        <a href="#" class="btn  btn-warning">Read more</a>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
