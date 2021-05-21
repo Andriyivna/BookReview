@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class RegisterComponent implements OnInit {
 
-  constructor(public service: UserService, private router: Router, private http:HttpClient) { }
+  constructor(public service: UserService, private router: Router, private http: HttpClient) { }
 
   readonly BaseURL = 'https://localhost:5001/api';
 
@@ -25,15 +25,15 @@ export class RegisterComponent implements OnInit {
   }
 
   getAvatars(){
-    this.http.get<any>(this.BaseURL+`/Avatars`).subscribe( res => {
+    this.http.get<any>(this.BaseURL + `/Avatars`).subscribe( res => {
       this.Avatars = res;
       console.log(this.Avatars);
     } );
   }
-  
+
   onSubmit(){
     this.service.register().subscribe(
-      (res:any) =>{
+      (res: any) => {
         this.router.navigate(['/login']);
       },
       err => {

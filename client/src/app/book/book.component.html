@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mg-l-0" *ngIf="!isAdded then addbook">
+                <div class="row mg-l-0" *ngIf="!booksAdded then addbook">
                 </div>
                 <div class="row">
                     <div class="col">
@@ -68,49 +68,49 @@
                     </div>
                 </div>
 
-                <div class="row mg-t mg-b">
-
+                <div class="row mg-t mg-b" *ngIf="!reviewAdded">
                     <div class="col mg-l mg-r">
                         <div class="card">
+                          <form #form='ngForm' (submit)="publish(form)">
                             <h5 class="card-header fnt">Add new review</h5>
                             <div class="card-body">
                                 <h5 class="card-title fnt">Rate:</h5>
                                 <span class="starRating">
-                                    <input id="rating1" type="radio" name="rating" value="1">
+                                    <input id="rating1" type="radio" name="givenRate" ngModel required value=1>
                                     <label for="rating1">1</label>
-                                    <input id="rating2" type="radio" name="rating" value="2">
+                                    <input id="rating2" type="radio" name="givenRate"ngModel required   value=2>
                                     <label for="rating2">2</label>
-                                    <input id="rating3" type="radio" name="rating" value="3">
+                                    <input id="rating3" type="radio" name="givenRate"ngModel required  value=3>
                                     <label for="rating3">3</label>
-                                    <input id="rating4" type="radio" name="rating" value="4">
+                                    <input id="rating4" type="radio" name="givenRate" ngModel required  value=4>
                                     <label for="rating4">4</label>
-                                    <input id="rating5" type="radio" name="rating" value="5">
+                                    <input id="rating5" type="radio" name="givenRate" ngModel required value=5>
                                     <label for="rating5">5</label>
-                                    <input id="rating6" type="radio" name="rating" value="6">
+                                    <input id="rating6" type="radio" name="givenRate" ngModel required   value=6>
                                     <label for="rating6">6</label>
-                                    <input id="rating7" type="radio" name="rating" value="7">
+                                    <input id="rating7" type="radio" name="givenRate" ngModel required   value=7>
                                     <label for="rating7">7</label>
-                                    <input id="rating8" type="radio" name="rating" value="8">
+                                    <input id="rating8" type="radio" name="givenRate" ngModel required  value=8>
                                     <label for="rating8">8</label>
-                                    <input id="rating9" type="radio" name="rating" value="9">
+                                    <input id="rating9" type="radio" name="givenRate"ngModel required   value=9>
                                     <label for="rating9">9</label>
-                                    <input id="rating10" type="radio" name="rating" value="10">
+                                    <input id="rating10" type="radio" name="givenRate" ngModel required  value=10>
                                     <label for="rating10">10</label>
                                 </span>
                                 <h5 class="card-title fnt mg-t">Review:</h5>
-                                <input class="form-control fnt" placeholder="headline of your review">
-                                <textarea class="form-control mg-t fnt" id="exampleFormControlTextarea1" rows="4" placeholder="your review"></textarea>
-                                <button class="btn mg-t"><p class="fnt mg-b-0">Publish</p></button>
+                                <textarea class="form-control mg-t fnt" name="content" ngModel required  id="exampleFormControlTextarea1" rows="4" placeholder="your review"></textarea>
+                                <button type="submit" [disabled]="!form.valid" class="btn mg-t"><p class="fnt mg-b-0">Publish</p></button>
                             </div>
+                          </form>
                         </div>
-
                     </div>
                 </div>
 
-                <div class="row mg-b">
+              <div *ngFor="let item of reviews">
+                <div class="row mg-b" >
                     <div class="col-sm-fluid mg-l">
-                        <img class="av-s" src="assets\avatars\av-female-2.jpg">
-                        <p class="fnt c">Eleanoir</p>
+                        <img class="av-s" src="assets/{{item.avatar}}">
+                        <p class="fnt c">{{item.displayName}}</p>
                     </div>
                     <div class="col mg-l mg-r">
                         <div class="row">
@@ -118,49 +118,44 @@
                                 <p class="fnt s-115 b mg-b-0">Kocham te ksiazke!</p>
                             </div>
                             <div class="row-auto mg-l">
-                                <p class="fnt ar b s-115 red mg-b-0">9</p>
+                                <p class="fnt ar b s-115 red mg-b-0">{{item.givenRate}}</p>
                             </div>
                             <div class="row-auto">
                                 <p class="fnt al s-115 mg-b-0">/10</p>
                             </div>
                         </div>
                         <div class="row">
-                            <p class="fnt">Jeszcze lepsze niż poprzednia część!
-
-                                Z każdym opowiadaniem coraz bardziej zakochuję się w uniwersum wiedźmińskim i coraz bardziej docieram się ze stylem Pana Sapkowskiego,
-                                bo - nie ukrywajmy - jest on jednak troszkę toporny. Uwielbiam nazywać go polskim Tolkienem, bo jak świat jest super i chce się to czytać,
-                                bo przygody Geralta wciągają i intrygują i chce się całą książkę połknąć na raz, tak nie można tego zrobić, bo wszystko jest napisane powolnym
-                                tempem i troszeczkę ciężkim piórem (co może być przełożeniem niektórych sentencji i rozważań narratora). Niemniej jednak naprawdę dobra pozycja
-                                i polecam każdemu, aby przebrnął przez pierwszy tom (albo 0.5, jak kto woli), żeby potem się rozkochać w Wiedźminie w następnych tomach.</p>
+                            <p class="fnt"> {{item.content}}</p>
                         </div>
                         </div>
                 </div>
-
-                <div class="row mg-b">
-                    <div class="col-sm-fluid mg-l">
-                        <img class="av-s" src="assets\avatars\av-male-2.jpg">
-                        <p class="fnt c">Adam231</p>
-                    </div>
-                    <div class="col mg-l mg-r">
-                        <div class="row">
-                            <div class="col-lg-">
-                                <p class="fnt s-115 b mg-b-0">Fajna</p>
-                            </div>
-                            <div class="row-auto mg-l">
-                                <p class="fnt ar b s-115 red mg-b-0">8</p>
-                            </div>
-                            <div class="row-auto">
-                                <p class="fnt al s-115 mg-b-0">/10</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <p class="fnt">Zdecydowanie lepsza część niż jedynka, język jest dla mnie bardziej do zniesienia.
-                                W tym tomie poznajemy też Ciri, więc bardzo mi się podobało! Już nie mogę się doczekać sagi!</p>
-                        </div>
-                        </div>
-                </div>
-
             </div>
+
+<!--                <div class="row mg-b">-->
+<!--                    <div class="col-sm-fluid mg-l">-->
+<!--                        <img class="av-s" src="assets\avatars\av-male-2.jpg">-->
+<!--                        <p class="fnt c">Adam231</p>-->
+<!--                    </div>-->
+<!--                    <div class="col mg-l mg-r">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-">-->
+<!--                                <p class="fnt s-115 b mg-b-0">Fajna</p>-->
+<!--                            </div>-->
+<!--                            <div class="row-auto mg-l">-->
+<!--                                <p class="fnt ar b s-115 red mg-b-0">8</p>-->
+<!--                            </div>-->
+<!--                            <div class="row-auto">-->
+<!--                                <p class="fnt al s-115 mg-b-0">/10</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <p class="fnt">Zdecydowanie lepsza część niż jedynka, język jest dla mnie bardziej do zniesienia.-->
+<!--                                W tym tomie poznajemy też Ciri, więc bardzo mi się podobało! Już nie mogę się doczekać sagi!</p>-->
+<!--                        </div>-->
+<!--                        </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
         </div>
     </div>
     <div class="container pt-3"></div>
