@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Book, Review} from './book.component';
 import {Observable} from 'rxjs';
+import {Quote} from '../home/home.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,8 @@ export class BookService {
   }
   addReview(review: Review) {
     return this.http.post(this.ApiURL + 'Reviews', review);
+  }
+  getDailyQuote(): Promise<Quote> {
+    return this.http.get<Quote>(this.ApiURL + 'Book/dailyquote').toPromise();
   }
 }

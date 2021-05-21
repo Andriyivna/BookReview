@@ -56,13 +56,28 @@ namespace API.Data
                             FirstName = "J.R.R.",
                             SecondName = "Tolkien"
                         }
+
                     };
 
                     context.Authors.AddRange(authors);
 
                     await context.SaveChangesAsync();
                 }
-                List<Genre> genres = context.Genres.ToList();
+                if (!context.Authors.Any(q => q.SecondName == "Salvatore"))
+                {
+                    authors = new List<Author>
+                    {
+                        new Author
+                        {
+                            FirstName = "R.A.",
+                            SecondName = "Salvatore"
+                        },
+                    };
+                    context.Authors.AddRange(authors);
+
+                    await context.SaveChangesAsync();
+                }
+                    List<Genre> genres = context.Genres.ToList();
                 if (!context.Genres.Any(q=>q.Name== "Fantasy"))
                 {
                     genres = new List<Genre>
@@ -216,6 +231,24 @@ namespace API.Data
 
                     await context.SaveChangesAsync();
                 }
+
+                var quotes = new List<Quote>
+                    {
+                        new Quote{
+                         Content="Ci najpotężniejsi w Menzoberranzan spędzają całe dnie na oglądaniu sie przez ramię, by ochronić się przed sztyletami, które mogłyby się wbić w ich plecy." +
+                         "A śmierć czeka zwykle z przodu.",
+                         Author = authors.Where(s=>s.SecondName=="Salvatore").FirstOrDefault()
+                        },
+                         new Quote{
+                         Content="- Dni są krótkie - stwierdziła - a droga długa." +
+                         "- Tak długa, jaką ją uczynisz - odezwał się Drizzt, przyciągając znów jej uwagę. - A dni są tak krótkie, jakimi pozwolisz im być.",
+                         Author = authors.Where(s=>s.SecondName=="Salvatore").FirstOrDefault()
+                        }
+                    };
+
+                    context.AddRange(quotes);
+
+                    await context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

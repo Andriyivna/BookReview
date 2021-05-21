@@ -225,5 +225,16 @@ namespace API.Controllers
             }
             return filePathDetail;
         }
+        [HttpGet("dailyquote")]
+        public ActionResult<QuoteDTO> GetQuote()
+        {
+            int maxID = _context.Quotes.Max(u => u.Id);
+            int minID = _context.Quotes.Min(u => u.Id);
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            int id = rnd.Next(minID, maxID+1);
+            var quote = _context.Quotes.Include(q=>q.Author).Where(q => q.Id == id).FirstOrDefault();
+            var dailyQuote = _mapper.Map<QuoteDTO>(quote);
+            return dailyQuote;
+        }
     }
 }
