@@ -21,6 +21,6 @@ export class BookService {
     return this.http.get<Review[]>(this.ApiURL + 'Reviews/book/' + bookID);
   }
   addReview(review: Review) {
-    return this.http.post(this.ApiURL + 'Reviews', review).subscribe();
+    return this.http.post(this.ApiURL + 'Reviews', review);
   }
 }
