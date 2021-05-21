@@ -69,17 +69,7 @@ namespace API.Controllers
             var dtobook = _mapper.Map<BetterBook>(book);
             return Ok(dtobook);
         }
-        [HttpGet("title/{title}")]
-        public ActionResult<BetterBook> GetABookWithTitle(string title)
-        {
-            var book = _context.Books.Include(a => a.Author).Include(g => g.Genre).FirstOrDefault(p => p.Title == title);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            var dtobook = _mapper.Map<BetterBook>(book);
-            return Ok(dtobook);
-        }
+        
 
         [HttpPut]
         public IActionResult UpdateBook(BetterBook book)
@@ -119,6 +109,18 @@ namespace API.Controllers
             _context.Books.Remove(newbook);
             _context.SaveChanges();
             return NoContent();
+        }
+
+        [HttpGet("title/{title}")]
+        public ActionResult<BetterBook> GetABookWithTitle(string title)
+        {
+            var book = _context.Books.Include(a => a.Author).Include(g => g.Genre).FirstOrDefault(p => p.Title == title);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            var dtobook = _mapper.Map<BetterBook>(book);
+            return Ok(dtobook);
         }
 
         [HttpGet("sort/rate/{order}")]
@@ -183,6 +185,17 @@ namespace API.Controllers
         {
             List<Book> filtredBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).Where(q => q.Author.FirstName.ToLower().Contains(author.ToLower())).ToList();
             filtredBooks.AddRange(_context.Books.Include(a => a.Author).Include(g => g.Genre).Where(q => q.Author.SecondName.ToLower().Contains(author.ToLower())).ToList());
+            var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
+            return Ok(dtobook);
+        }
+        [HttpGet("filtreTitle/{title}")]
+        public ActionResult<IReadOnlyList<BetterBook>> FiltreBooksWithTitle(string title)
+        {
+            List<Book> filtredBooks = _context.Books.Include(a => a.Author).Include(g => g.Genre).Where(q => q.Title.ToLower().Contains(title.ToLower())).ToList();
+            if (filtredBooks == null)
+            {
+                return NotFound();
+            }
             var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
             return Ok(dtobook);
         }
