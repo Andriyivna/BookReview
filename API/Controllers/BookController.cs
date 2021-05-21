@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -199,6 +200,30 @@ namespace API.Controllers
             var dtobook = _mapper.Map<IReadOnlyList<BetterBook>>(filtredBooks);
             return Ok(dtobook);
         }
+        [HttpPost("addPhoto")]
+        public string GetFile( UploadedImg img)
+        {
+            // Create unique file name
+            string photoId = Guid.NewGuid().ToString();
+            //string filePath = @"ClientApp\src\assets\Post\" + photoId + ".jpg";
+            string filePathDetail = "assets/img/" + photoId + ".jpg";
+            string filePath = @"client/src/assets/img/" + photoId + ".jpg";
+            // Remove file type from base64 encoding, if any
+            if (img.FileAsBase64.Contains(","))
+            {
+                img.FileAsBase64 = img.FileAsBase64
+                  .Substring(img.FileAsBase64.IndexOf(",") + 1);
+            }
 
+            // Convert base64 encoded string to binary
+            img.FileAsByteArray = Convert.FromBase64String(img.FileAsBase64);
+
+            // Write binary file to server path
+            using (var fs = new FileStream(filePath, FileMode.CreateNew))
+            {
+                fs.Write(img.FileAsByteArray, 0, img.FileAsByteArray.Length);
+            }
+            return filePathDetail;
+        }
     }
 }
