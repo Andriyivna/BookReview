@@ -207,7 +207,7 @@ namespace API.Controllers
             string photoId = Guid.NewGuid().ToString();
             //string filePath = @"ClientApp\src\assets\Post\" + photoId + ".jpg";
             string filePathDetail = "assets/img/" + photoId + ".jpg";
-            string filePath = @"client/src/assets/img/" + photoId + ".jpg";
+            string filePath = "../client/src/assets/img/" + photoId + ".jpg";
             // Remove file type from base64 encoding, if any
             if (img.FileAsBase64.Contains(","))
             {
