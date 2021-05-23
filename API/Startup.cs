@@ -37,6 +37,8 @@ namespace API
 
             services.AddScoped<IVirtualLibrariesRepository, VirtualLibrariesRepository>();
 
+            services.AddScoped<IQuotesRepository, QuotesRepository>();
+
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddIdentityServices(Configuration);

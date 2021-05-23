@@ -53,12 +53,20 @@ namespace API.Helpers
                     opt => opt.MapFrom(src => Math.Round(src.GivenRate, 1)));
             CreateMap<Review, ReviewReturnDto>();
             CreateMap<Genre, GenreDto>();
+
             CreateMap<Quote, QuoteDTO>()
                 .ForMember(
                     dest => dest.Author,
                     opt => opt.MapFrom(src => src.Author.FirstName + " " + src.Author.SecondName)
                     );
         
+            CreateMap<Quote, QuoteOfTheDayDto>()
+                .ForMember(
+                    dest => dest.BookTitle,
+                    opt => opt.MapFrom(src => src.Book.Title))
+                .ForMember(
+                    dest => dest.AuthorName,
+                    opt => opt.MapFrom(src => $"{src.Author.FirstName} {src.Author.SecondName}"));
         }
     }
 }
