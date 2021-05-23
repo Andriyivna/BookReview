@@ -233,7 +233,7 @@ namespace API.Data
                 }
 
 
-                var quotes = new List<Quote>
+                var myquotes = new List<Quote>
                     {
                         new Quote{
                          Content="Ci najpotężniejsi w Menzoberranzan spędzają całe dnie na oglądaniu sie przez ramię, by ochronić się przed sztyletami, które mogłyby się wbić w ich plecy." +
@@ -247,7 +247,7 @@ namespace API.Data
                         }
                     };
 
-                    context.AddRange(quotes);
+                    context.AddRange(myquotes);
 
                     await context.SaveChangesAsync();
 
