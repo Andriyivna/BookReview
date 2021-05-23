@@ -32,7 +32,7 @@
                             </div>
                             <div class="row mg-b-0">
                                 <img src="http://pngimg.com/uploads/red_star/red_star_PNG12.png" width="18" height="18" style="margin-top: 10px;">
-                                <p class="fnt b s-115 red mg-b-0">{{book.averageRates}}</p>
+                                <p class="fnt b s-115 red mg-b-0">{{book.averageRates | number: '1.1-2'}}</p>
                                 <p class="fnt mg-b-0" style="margin-top: 5px;">/10</p>
                             </div>
                             <div class="row">
@@ -76,25 +76,25 @@
                             <div class="card-body">
                                 <h5 class="card-title fnt">Rate:</h5>
                                 <span class="starRating">
-                                    <input id="rating1" type="radio" name="givenRate" ngModel required value=1>
+                                    <input id="rating1" type="radio" name="givenRate" ngModel required value='10'>
                                     <label for="rating1">1</label>
-                                    <input id="rating2" type="radio" name="givenRate"ngModel required   value=2>
+                                    <input id="rating2" type="radio" name="givenRate"ngModel required   value='9'>
                                     <label for="rating2">2</label>
-                                    <input id="rating3" type="radio" name="givenRate"ngModel required  value=3>
+                                    <input id="rating3" type="radio" name="givenRate"ngModel required  value='8'>
                                     <label for="rating3">3</label>
-                                    <input id="rating4" type="radio" name="givenRate" ngModel required  value=4>
+                                    <input id="rating4" type="radio" name="givenRate" ngModel required  value='7'>
                                     <label for="rating4">4</label>
-                                    <input id="rating5" type="radio" name="givenRate" ngModel required value=5>
+                                    <input id="rating5" type="radio" name="givenRate" ngModel required value='6'>
                                     <label for="rating5">5</label>
-                                    <input id="rating6" type="radio" name="givenRate" ngModel required   value=6>
+                                    <input id="rating6" type="radio" name="givenRate" ngModel required   value='5'>
                                     <label for="rating6">6</label>
-                                    <input id="rating7" type="radio" name="givenRate" ngModel required   value=7>
+                                    <input id="rating7" type="radio" name="givenRate" ngModel required   value='4'>
                                     <label for="rating7">7</label>
-                                    <input id="rating8" type="radio" name="givenRate" ngModel required  value=8>
+                                    <input id="rating8" type="radio" name="givenRate" ngModel required  value='3'>
                                     <label for="rating8">8</label>
-                                    <input id="rating9" type="radio" name="givenRate"ngModel required   value=9>
+                                    <input id="rating9" type="radio" name="givenRate"ngModel required   value='2'>
                                     <label for="rating9">9</label>
-                                    <input id="rating10" type="radio" name="givenRate" ngModel required  value=10>
+                                    <input id="rating10" type="radio" name="givenRate" ngModel required  value='1'>
                                     <label for="rating10">10</label>
                                 </span>
                                 <h5 class="card-title fnt mg-t">Review:</h5>

@@ -25,6 +25,7 @@ content: string;
 bookID: number;
 avatar: string;
 displayName: string;
+bookTitle: string;
 }
 
 @Component({
@@ -86,8 +87,11 @@ export class BookComponent implements OnInit {
     this.review = form.value;
     this.review.bookID = this.book.id;
     this.review.givenRate = +this.review.givenRate;
-    this.bookService.addReview(this.review);
-
+    this.bookService.addReview(this.review).subscribe(res => {
+      if (res){
+        this.reviews.push(this.review);
+      }
+    });
   }
 
 }

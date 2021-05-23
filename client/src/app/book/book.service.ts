@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Book, Review} from './book.component';
 import {Observable} from 'rxjs';
+import {Quote} from '../home/home.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,9 @@ export class BookService {
     return this.http.get<Review[]>(this.ApiURL + 'Reviews/book/' + bookID);
   }
   addReview(review: Review) {
-    return this.http.post(this.ApiURL + 'Reviews', review).subscribe();
+    return this.http.post(this.ApiURL + 'Reviews', review);
+  }
+  getDailyQuote(): Observable<Quote> {
+    return this.http.get<Quote>(this.ApiURL + 'Book/dailyquote');
   }
 }

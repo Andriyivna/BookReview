@@ -1,4 +1,4 @@
-<div class="wrapper">    
+<div class="wrapper">
     <header class="page-header gradient2">
         <div class="">
             <div class="d-flex justify-content-center">
@@ -15,7 +15,7 @@
                     <label for="displayname">Display Name</label>
                     <input class="text-center rounded shadow" name="displayName" type="test" value="{{displayName}}" disabled>
                 </div>
-                
+
             </div>
         </div>
     </header>
@@ -33,24 +33,12 @@
                     <th scope="col">Rating</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let item of reviews" >
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Some title</td>
-                    <td>This book was trash...</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Another title</td>
-                    <td>That one was kinda good tho</td>
-                    <td>4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Yet another one</td>
-                    <td>The rhymes are exquisite and it's pretty fun to read-it ;)</td>
-                    <td>5</td>
+                    <th scope="row">{{reviews.indexOf(item) +1}}</th>
+                    <td>{{item.bookTitle}}</td>
+                    <td>{{item.content}}</td>
+                    <td>{{item.givenRate}}</td>
                   </tr>
                 </tbody>
               </table>

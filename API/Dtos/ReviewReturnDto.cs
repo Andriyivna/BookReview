@@ -9,5 +9,6 @@
         public string Content { get; set; }
         public string AddedAt { get; set; }
         public int BookId { get; set; }
+        public string BookTitle { get; set; }
     }
 }

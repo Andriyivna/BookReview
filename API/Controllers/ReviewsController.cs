@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,15 @@ namespace API.Controllers
             }
             return Ok(data);
         }
+        [HttpGet("book/review/{user}")]
+        public async Task<ActionResult<IReadOnlyList<ReviewReturnDto>>> GetReviewsForUser(string user)
+        {
+            var reviewsFromDb =_context.Reviews.Include(q=>q.Book).Where(q => q.User.DisplayName == user);
+
+            var data = _mapper.Map<IReadOnlyList<ReviewReturnDto>>(reviewsFromDb);
+            await Task.CompletedTask;
+            return Ok(data);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ReviewReturnDto>> GetReviewById(int id)
@@ -83,7 +93,23 @@ namespace API.Controllers
             review.UserId = user.Id;
 
             var addedReview = await _repo.AddReviewAsync(review);
-
+            var revies = _context.Reviews.Where(q => q.BookId == addedReview.BookId).ToList();
+            if (revies.Count > 0)
+            {
+                double averangeRate = 0;
+                foreach (var item in revies)
+                {
+                    averangeRate += item.GivenRate;
+                }
+                double rate = averangeRate / revies.Count;
+                var book = _context.Books.Where(q => q.Id == addedReview.BookId).FirstOrDefault();
+                if (book != null)
+                {
+                    book.AverageRates = rate;
+                    _context.Books.Update(book);
+                    _context.SaveChanges();
+                }
+            }
             var reviewToReturn = _mapper.Map<ReviewReturnDto>(addedReview);
 
             return CreatedAtAction(nameof(GetReviewById), new { id = reviewToReturn.Id }, reviewToReturn);
