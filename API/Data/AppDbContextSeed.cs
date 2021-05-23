@@ -232,6 +232,7 @@ namespace API.Data
                     await context.SaveChangesAsync();
                 }
 
+
                 var quotes = new List<Quote>
                     {
                         new Quote{
@@ -249,6 +250,65 @@ namespace API.Data
                     context.AddRange(quotes);
 
                     await context.SaveChangesAsync();
+
+                if (!context.Quotes.Any())
+                {
+                    var mieczPrzezaczenia = await context.Books.Include(x => x.Author)
+                        .Where(x => x.Title.ToLower() == "miecz przeznaczenia")
+                        .FirstOrDefaultAsync();
+
+                    var harryPotter = await context.Books.Include(x => x.Author)
+                        .Where(x => x.Title.ToLower() == "harry potter")
+                        .FirstOrDefaultAsync();
+
+                    var kwiatyAlgernona = await context.Books.Include(x => x.Author)
+                        .Where(x => x.Title.ToLower() == "kwiaty dla alegerona")
+                        .FirstOrDefaultAsync();
+
+                    var quotes = new List<Quote>
+                    {
+                        new Quote
+                        {
+                            Author = mieczPrzezaczenia.Author,
+                            Book = mieczPrzezaczenia,
+                            Content = "Nigdy nie ma się drugiej okazji, żeby zrobić pierwsze wrażenie."
+                        },
+                        new Quote
+                        {
+                            Author = mieczPrzezaczenia.Author,
+                            Book = mieczPrzezaczenia,
+                            Content = "Miecz przeznaczenia ma dwa ostrza. Jednym jesteś ty."
+                        },
+                        new Quote
+                        {
+                            Author = harryPotter.Author,
+                            Book = harryPotter,
+                            Content = "Patrząc na ciemność lub śmierć boimy się nieznanego - niczego więcej."
+                        },
+                        new Quote
+                        {
+                            Author = harryPotter.Author,
+                            Book = harryPotter,
+                            Content = "Niczego nie daje pogrążanie się w marzeniach i zapominanie o życiu."
+                        },
+                        new Quote
+                        {
+                            Author = kwiatyAlgernona.Author,
+                            Book = kwiatyAlgernona,
+                            Content = "Inteligencja i wykształcenie nie wzbogacone ludzkimi uczuciami nie mają żadnego znaczenia."
+                        },
+                        new Quote
+                        {
+                            Author = kwiatyAlgernona.Author,
+                            Book = kwiatyAlgernona,
+                            Content = "Boję się. Nie życia, nie śmierci, nie pustki, w której nie ma nic, lecz zniknięcia, jakbym nigdy nie istniał."
+                        }
+                    };
+
+                    await context.Quotes.AddRangeAsync(quotes);
+                    await context.SaveChangesAsync();
+                }
+
             }
             catch (Exception ex)
             {
