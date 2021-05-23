@@ -24,7 +24,7 @@ export class BookService {
   addReview(review: Review) {
     return this.http.post(this.ApiURL + 'Reviews', review);
   }
-  getDailyQuote(): Promise<Quote> {
-    return this.http.get<Quote>(this.ApiURL + 'Book/dailyquote').toPromise();
+  getDailyQuote(): Observable<Quote> {
+    return this.http.get<Quote>(this.ApiURL + 'Book/dailyquote');
   }
 }

@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   isLoggedIn: boolean = false;
   books: Book[] = [];
-  dailyQuote: Quote;
+  dailyQuote: Quote = null;
   constructor( private bookService: BookService) {
   }
 
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       this.isLoggedIn = true;
     }
     this.books = await this.bookService.getHighRateBook(4);
-    this.dailyQuote = await this.bookService.getDailyQuote();
+    this.dailyQuote = await this.bookService.getDailyQuote().toPromise();
   }
 
 }
