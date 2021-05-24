@@ -32,7 +32,7 @@ namespace API.Data
             try
             {
                 List<Author> authors = context.Authors.ToList();
-                if (!context.Authors.Any(q=>q.SecondName== "Rowling"))
+                if (!context.Authors.Any(q => q.SecondName == "Rowling"))
                 {
                     authors = new List<Author>
                     {
@@ -77,8 +77,8 @@ namespace API.Data
 
                     await context.SaveChangesAsync();
                 }
-                    List<Genre> genres = context.Genres.ToList();
-                if (!context.Genres.Any(q=>q.Name== "Fantasy"))
+                List<Genre> genres = context.Genres.ToList();
+                if (!context.Genres.Any(q => q.Name == "Fantasy"))
                 {
                     genres = new List<Genre>
                     {
@@ -105,7 +105,7 @@ namespace API.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.Books.Any(q=>q.Title== "Kwiaty dla Alegerona"))
+                if (!context.Books.Any(q => q.Title == "Kwiaty dla Alegerona"))
                 {
 
                     var books = new List<Book>
@@ -232,24 +232,31 @@ namespace API.Data
                     await context.SaveChangesAsync();
                 }
 
-
-                var myquotes = new List<Quote>
+                if (!context.Quotes.Any(q => q.Author.SecondName == "Salvatore"))
+                {
+                    var mieczPrzezaczenia = await context.Books.Include(x => x.Author)
+                        .Where(x => x.Title.ToLower() == "miecz przeznaczenia")
+                        .FirstOrDefaultAsync();
+                    var myquotes = new List<Quote>
                     {
                         new Quote{
                          Content="Ci najpotężniejsi w Menzoberranzan spędzają całe dnie na oglądaniu sie przez ramię, by ochronić się przed sztyletami, które mogłyby się wbić w ich plecy." +
                          "A śmierć czeka zwykle z przodu.",
-                         Author = authors.Where(s=>s.SecondName=="Salvatore").FirstOrDefault()
+                         Author = authors.Where(s=>s.SecondName=="Salvatore").FirstOrDefault(),
+                         Book = mieczPrzezaczenia
                         },
                          new Quote{
                          Content="- Dni są krótkie - stwierdziła - a droga długa." +
                          "- Tak długa, jaką ją uczynisz - odezwał się Drizzt, przyciągając znów jej uwagę. - A dni są tak krótkie, jakimi pozwolisz im być.",
-                         Author = authors.Where(s=>s.SecondName=="Salvatore").FirstOrDefault()
-                        }
+                          Author = authors.Where(s=>s.SecondName=="Salvatore").FirstOrDefault(),
+                          Book = mieczPrzezaczenia
+                          }
                     };
 
-                    context.AddRange(myquotes);
+                    context.Quotes.AddRange(myquotes);
 
                     await context.SaveChangesAsync();
+                }
 
                 if (!context.Quotes.Any())
                 {
