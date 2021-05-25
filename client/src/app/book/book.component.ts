@@ -87,9 +87,9 @@ export class BookComponent implements OnInit {
     this.review = form.value;
     this.review.bookID = this.book.id;
     this.review.givenRate = +this.review.givenRate;
-    this.bookService.addReview(this.review).subscribe(res => {
+    this.bookService.addReview(this.review).subscribe(async res => {
       if (res){
-        this.reviews.push(this.review);
+        this.reviews = await this.bookService.getReviews(this.book.id).toPromise();
       }
     });
   }
