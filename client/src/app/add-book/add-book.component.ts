@@ -5,7 +5,7 @@ import { Author } from '../bookcase/components/authors/authors.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
-export interface FileToUpload {
+export class FileToUpload {
   fileName: string;
   fileSize: number;
   fileType: string;
@@ -103,13 +103,14 @@ export class AddBookComponent implements OnInit {
   }
   str: any;
   bookId: any;
-  addBook() {
+  addBook(resp:string) {
     var genre: any;
     var formValue: any;
 
     this.str = this.addBookForm.get('coverImg').value.split('\\');
     formValue = this.addBookForm.value;
-    formValue['coverImg'] = this.str[this.str.length - 1];
+    formValue['coverImg'] = resp;
+      //this.str[this.str.length - 1];
 
     for (var i = 0; i < this.genres.length; i++) {
       if (this.genres[i].name == formValue['genreId']) {
@@ -128,7 +129,7 @@ export class AddBookComponent implements OnInit {
   fetchedBook: Book;
 
   onSubmit() {
-    this.readAndUploadFile(this.addBookForm.get('coverImg'));
+    this.readAndUploadFile(this.theFile);
   }
 
   getBook(title: string): Promise<Book> {
@@ -163,9 +164,9 @@ export class AddBookComponent implements OnInit {
   }
 
   private readAndUploadFile(theFile: any) {
-    let file: FileToUpload;
+    let file = new FileToUpload();
     // Set File Information
-    console.log(theFile)
+    console.log(this.theFile);
     file.fileName = theFile.name;
     file.fileSize = theFile.size;
     file.fileType = theFile.type;
@@ -178,14 +179,12 @@ export class AddBookComponent implements OnInit {
       file.fileAsBase64 = reader.result.toString();
       // POST to server
       this.http.post(this.ApiURL + '/Book/addPhoto', file, { responseType: 'text' }).subscribe(resp => {
-        this.addBookForm.get('coverImg').value(resp);
-        console.log(this.addBookForm.get('coverImg').value);
-        this.addBook().subscribe(
+        this.addBook(resp).subscribe(
           (res: any) => {
             this.isSent = true;
             this.getBook(this.addBookForm.get('title').value).then(data => {
-              this.router.navigateByUrl('/book/' + data.id)
-            })
+              this.router.navigateByUrl('/book/' + data.id);
+            });
           },
           err => {
             console.log(err);
