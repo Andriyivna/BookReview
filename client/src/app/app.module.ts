@@ -16,6 +16,7 @@ import { BookComponent } from './book/book.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AddBookComponent } from './add-book/add-book.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { CallbackPipe } from './shared/pipes/callback.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CategoriesComponent } from './categories/categories.component';
     ProfileComponent,
     BookComponent,
     AddBookComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CallbackPipe
   ],
   imports: [
     BrowserModule,
