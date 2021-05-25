@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VirtualLibraryService } from '../../services/virtual-library.service';
-import { AuthorsService } from '../../services/authors.service';
-import { Author } from '../authors/authors.component';
-import { Book } from '../../../book/book.component';
 
 export interface MyBook {
   id?: number;

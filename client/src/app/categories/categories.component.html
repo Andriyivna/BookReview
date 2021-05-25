@@ -7,114 +7,106 @@
                     <div class="col-s mg-t mg-b ml-2">
                         <div class="card" style="width: 18rem;">
                             <div class="card-body mg-l mg-r mg-t mg-b">
-                              <h5 class="card-title s-15">Search book</h5>
-                              <h6 class="card-text mt-4 b">Through title:</h6>
-                              <div class="input-group rounded">
-                                <input type="search" class="form-control rounded" placeholder="book's title" aria-label="Search"
-                                  aria-describedby="search-addon" />
-                                <span class="input-group-text border-0" id="search-addon">
-                                  <i class="fas fa-search"></i>
-                                </span>
-                              </div>
-                              <h6 class="card-text mt-5 b">Through details:</h6>
-                              <h6 class="card-text mt-3">Genre</h6>
-                              <select class="form-control">
-                                <option value="" disabled selected>genre</option>
-                                <option value="Horror">Horror</option>
-                                <option value="Sci-Fi">Sci-Fi</option>
-                                <option value="Mystery">Mystery</option>
-                                <option value="Thriller">Thriller</option>
-                                <option value="Romance">Romance</option>
-                                <option value="Travel">Travel</option>
-                                <option value="Guide">Guide</option>
-                                <option value="Fantasy">Fantasy</option>
-                                <option value="History">History</option>
-                              </select>
-                              <h6 class="card-text mt-3">Year of publication</h6>
-                              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="year">
-                              <h6 class="card-text mt-3">Author</h6>
-                              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name/surname">
-                              <h6 class="card-text mt-3">Average rating</h6>
-                              <div class="row">
-                                <div class="col-3"><input type="email" class="form-control mg-l-0" id="exampleFormControlInput1" placeholder="from" style="width: 60px;"></div>
-                                <div class="col-1"><h6 class="card-text s-15"> - </h6></div>
-                                <div class="col-3"><input type="email" class="form-control mg-l-0" id="exampleFormControlInput1" placeholder="to" style="width: 60px;"></div>
-                              </div>
-                              <button class="btn mt-4"><p class="fnt mg-b-0">Search</p></button>
+                                <form [formGroup]="searchBookForm" autocomplete="off">
+                                    <h5 class="card-title s-15">Search book</h5>
+
+                                    <h6 class="card-text mt-4 b">Through title:</h6>
+                                    <div class="input-group rounded form-group">
+                                        <input type="search" class="form-control rounded" placeholder=""
+                                            aria-label="Search" aria-describedby="search-addon"
+                                            formControlName="title" />
+                                        <span class="input-group-text border-0" id="search-addon">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
+
+                                    <h6 class="card-text mt-5 b">Through details:</h6>
+                                    <h6 class="card-text mt-3">Genre</h6>
+                                    <div class="input-group form-group">
+                                        <input class="form-control" list="datalistOptions" id="genreDataList"
+                                            placeholder="" formControlName="genreId" (change)="updateBooksByGenre()">
+                                        <datalist id="datalistOptions">
+                                            <option *ngFor="let genre of genres" value="{{genre.name}}"></option>
+                                        </datalist>
+                                    </div>
+
+                                    <h6 class="card-text mt-3">Author</h6>
+                                    <div class="input-group form-group">
+                                        <input class="form-control" list="authDatalistOptions" id="authorDataList"
+                                            placeholder="" formControlName="authorId" (change)="updateBooksByAuthor()">
+                                        <datalist id="authDatalistOptions">
+                                            <option *ngFor="let author of authors"
+                                                value="{{author.secondName}}"></option>
+                                        </datalist>
+                                    </div>
+
+                                    <h6 class="card-text mt-3">Average rating</h6>
+                                    <div class="row">
+                                        <div class="col-3"><input type="number" class="form-control mg-l-0 form-group"
+                                                id="minRating" formControlName="minRating"  max="10" style="width: 60px;"></div>
+                                        <div class="col-1">
+                                            <h6 class="card-text s-15"> - </h6>
+                                        </div>
+                                        <div class="col-3"><input type="number" class="form-control mg-l-0 form-group"
+                                                id="maxRating" formControlName="maxRating" min="1" max="10" style="width: 60px;"></div>
+                                        <div class="col-1">
+                                            <button (click)="filterByRating()" class="btn">
+                                                <p class="fnt mg-b-0">Apply</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <button (click)="resetSearch()" class="btn mt-4">
+                                    <p class="fnt mg-b-0">Reset</p>
+                                </button>
                             </div>
                         </div>
+
+
                         <div class="card mt-5" style="width: 18rem;">
                             <div class="card-body mg-l mg-r mg-t mg-b">
                                 <h6 class="card-text b c">Missing something?</h6>
                                 <div class="container mt-5">
                                     <div class="center mt-2">
-                                        <button class="btn"><p class="fnt mg-b-0">+ Add new book</p></button>
+                                        <button class="btn" routerLink="/add-book">
+                                            <p class="fnt mg-b-0">+ Add new book</p>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col">
+                        <div class="row ml-1">
+                            <div class="col-s mx-4" *ngFor="let book of books | callback: filterBooks">
+                                <div class="card book-card mx-auto my-3">
+                                    <img *ngIf="book.coverImg.includes('assets'); else elseImgBlock"
+                                        src="{{book.coverImg}}" alt="/assets/img/testimg.jpg" class="card-img-top">
+                                    <ng-template #elseImgBlock><img src="/assets/img/stock_no_img.jpg"
+                                            class="card-img-top card-img-size" alt="...">
+                                    </ng-template>
+                                    <div class="card-body">
+
+                                        <h5 class="card-title">{{book.title}}<span class="badge bg-warning text-dark"><i
+                                                    class="fas fa-star"></i>{{book.averageRates}}</span>
+                                        </h5>
+                                        <p class="card-text">{{book.author}}</p>
+                                        <a [routerLink]="['/book', book.id]" class="btn btn-warning">Read more</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="row ml-1">
-                            <div class="col-s">
-                                <div class="card book-card mx-auto my-3" >
-                                    <img src="assets/img/KwiatydlaAlgernona.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Kwiaty dla Algernona  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 5</span></h5>
-                                        <p class="card-text"> D.Keys</p>
-                                        <a href="#" class="btn btn-warning">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-s">
-                                <div class="card book-card mx-auto my-3" >
-                                    <img src="assets/img/KwiatydlaAlgernona.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Kwiaty dla Algernona  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 5</span></h5>
-                                        <p class="card-text"> D.Keys</p>
-                                        <a href="#" class="btn btn-warning">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-s">
-                                <div class="card book-card mx-auto my-3" >
-                                    <img src="assets/img/KwiatydlaAlgernona.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Kwiaty dla Algernona  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 5</span></h5>
-                                        <p class="card-text"> D.Keys</p>
-                                        <a href="#" class="btn btn-warning">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-s">
-                                <div class="card book-card mx-auto my-3" >
-                                    <img src="assets/img/KwiatydlaAlgernona.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Kwiaty dla Algernona  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 5</span></h5>
-                                        <p class="card-text"> D.Keys</p>
-                                        <a href="#" class="btn btn-warning">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-s">
-                                <div class="card book-card mx-auto my-3" >
-                                    <img src="assets/img/KwiatydlaAlgernona.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Kwiaty dla Algernona  <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> 5</span></h5>
-                                        <p class="card-text"> D.Keys</p>
-                                        <a href="#" class="btn btn-warning">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                   
+
+
                 </div>
             </div>
         </div>
     </div>
     <div class="container pt-3"></div>
-  
+
 </div>
-
-
-

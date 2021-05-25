@@ -1,55 +1,81 @@
 .fnt {
     font-family: Ibarra Real Nova;
 }
+
 .b {
     font-weight: bold;
 }
+
 .s-15 {
     font-size: 150%;
 }
+
 .s-115 {
     font-size: 125%;
 }
+
 .mg-t {
     margin-top: 2.5%;
 }
+
 .mg-b {
     margin-bottom: 2.5%;
 }
+
 .mg-b-0 {
     margin-bottom: 0;
 }
+
 .mg-t-0 {
     margin-top: 0;
 }
+
 .mg-b-0 {
     margin-bottom: 0;
 }
+
 .mg-l {
     margin-left: 2.5%;
 }
+
 .mg-r {
     margin-right: 2.5%;
 }
+
 .box-shad {
     box-shadow: -10px 15px 4px rgba(0, 0, 0, 0.25);
 }
+
 .bg-main {
     background-color: #E1E1E1;
 }
+
 .btn {
-    background:  #ffa93f;
+    background: #ffa93f;
     border: none;
-    text-decoration: none;  
+    text-decoration: none;
 }
+
 .c {
     text-align: center;
-  }
-  .center {
+}
+
+.center {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
+}
+
+.card-img-size {
+    object-fit: contain;
+    width: 200px;
+    height: 286px;
+}
+
+.card-title {
+    width: 200px;
+    word-wrap: break-word;
+}
