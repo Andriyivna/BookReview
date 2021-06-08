@@ -23,6 +23,9 @@ export class VirtualLibraryService {
     }).toPromise();
   }
 
+  delete(id: number): Promise<void>{
+    return  this.http.delete<void>(this.ApiURL + id).toPromise();
+  }
   add(id: number, status: string = 'ToRead'): Promise<Book>{
     return this.http.post<Book>(this.ApiURL, {
       bookId: id,

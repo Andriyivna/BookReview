@@ -34,6 +34,13 @@ export class BooksComponent implements OnInit {
       this.virtualLibraryService.changeStatus(id, status)
         .then(() => this.update());
   }
+  deleteVirtualBook(id: number): void{
+    const result = confirm('Are you sure you want to delete this book?');
+    if (result) {
+      this.virtualLibraryService.delete(id)
+        .then(() => this.update());
+    }
+  }
 
   update(): void {
     this.virtualLibraryService.getAll()
